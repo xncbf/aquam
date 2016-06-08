@@ -32,6 +32,9 @@
 /* 1. IMPORT SECTION */
 
 	@import url("http://fonts.googleapis.com/css?family=Raleway:200,300,600,700&subset=latin,latin-ext");
+	@import url("http://cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css");
+	@import url("https://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css");
+
 
 
 
@@ -43,8 +46,8 @@
 	}
 
 	body {
-		font-family: "Raleway", Helvetica, Arial, sans-serif;
-		font-size: 18px;
+		font-family: "Nanum barun gothic", Helvetica, Arial, sans-serif;
+		font-size: 16px;
 		font-weight: 200;
 		line-height: 1.7857;
 		letter-spacing: 0.075em;
@@ -86,7 +89,7 @@
 	}
 
 	h1, h2, h3, h4, h5, h6{
-		font-family: 'Raleway', sans-serif;
+		font-family: 'Nanum Square', sans-serif;
 		font-weight: 700;
 		text-transform: uppercase;
 	}
@@ -567,6 +570,7 @@
 	
 	#about-us{
 		background-color: #f5f5f5;
+		height: 400px;
 	}
 
 	#about-us .about-us{
@@ -586,6 +590,10 @@
 
 	#about-us .our-office{
 		padding-right: 0px;
+	}
+
+	.our-office img{
+		height:400px !important;
 	}
 
 	.office-carousel-left, 
@@ -709,8 +717,8 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-attachment: fixed;
-		padding-top: 150px;
-		padding-bottom: 150px;
+		padding-top: 200px;
+		padding-bottom: 200px;
 		position: relative;
 	}
 
@@ -719,8 +727,8 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-attachment: fixed;
-		padding-top: 150px;
-		padding-bottom: 150px;
+		padding-top: 200px;
+		padding-bottom: 200px;
 		position: relative;
 	}
 
