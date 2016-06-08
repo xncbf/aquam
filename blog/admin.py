@@ -46,7 +46,8 @@ class MultiUploadAdmin(admin.ModelAdmin):
     # tuple with mimetype accepted
     multiupload_acceptedformats = ("image/jpeg",
                                    "image/pjpeg",
-                                   "image/png", )
+                                   "image/png",
+                                   "image/gif",)
 
     multiupload_view_context = {}
 
