@@ -123,7 +123,7 @@ class MultiUploadAdmin(admin.ModelAdmin):
                                                                    **kwargs)
 
     def process_uploaded_file(self, uploaded, object, request):
-        '''
+        """
         Process uploaded file
         Parameters:
             uploaded: File that was uploaded
@@ -142,13 +142,13 @@ class MultiUploadAdmin(admin.ModelAdmin):
             "delete_type": "POST",
             "error" = 'Error message or jQueryFileUpload Error code'
         }
-        '''
+        """
         raise NotImplementedError
 
     def delete_file(self, pk, request):
-        '''
+        """
         Function to delete a file.
-        '''
+        """
         obj = get_object_or_404(self.queryset(request), pk=pk)
         return obj.delete()
 
@@ -292,7 +292,6 @@ class ImageInlineAdmin(admin.TabularInline):
 
 
 class GalleryMultiuploadMixing(object):
-
     def process_uploaded_file(self, uploaded, gallery, request):
         if gallery:
             image = gallery.images.create(file=uploaded)
@@ -312,9 +311,9 @@ class GalleryAdmin(GalleryMultiuploadMixing, MultiUploadAdmin):
     multiupload_list = False
 
     def delete_file(self, pk, request):
-        '''
+        """
         Delete an image.
-        '''
+        """
         obj = get_object_or_404(Image, pk=pk)
         return obj.delete()
 
@@ -322,8 +321,6 @@ class GalleryAdmin(GalleryMultiuploadMixing, MultiUploadAdmin):
 class ImageAdmin(GalleryMultiuploadMixing, MultiUploadAdmin):
     multiupload_form = False
     multiupload_list = True
-
-
 
 
 admin.site.register(Gallery, GalleryAdmin)
