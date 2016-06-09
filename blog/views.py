@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from blog.models import Gallery
 
 # Create your views here.
 def index(request):
@@ -8,6 +8,8 @@ def index(request):
     })
 
 def blog(request):
+    for e in Gallery.detail.all():
+        print(e.headline)
     return render(request, 'cluster/blog.html', {
 
     })
