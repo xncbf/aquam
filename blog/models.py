@@ -1,7 +1,7 @@
 from django.db import models
 
-# Create your models here.
 
+# Create your models here.
 class Gallery(models.Model):
     class Meta:
         verbose_name_plural = '게시판'
