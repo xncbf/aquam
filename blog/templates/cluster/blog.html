@@ -34,13 +34,14 @@
 	<!-- /HEADER -->
 {% endblock %}
 {% block content %}
+    {% block pageheader %}
 	<!-- PAGE HEADER -->
 	<section id="page-header">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section-title">
-						<h1>블로그</h1>
+                        <h1>블로그</h1>
 						<span class="st-border"></span>
 					</div>
 				</div>
@@ -48,6 +49,8 @@
 		</div>
 	</section>
 	<!-- /PAGE HEADER -->
+    {% endblock %}
+
 
 	<!-- BLOG -->
 	<section id="blog">
@@ -76,6 +79,7 @@
                     </div>
                     <hr>
                     {% endfor %}
+                {% block pagination %}
 					<ul class="pagination">
 
                         {% if paging_number != '1' %}
@@ -95,9 +99,10 @@
                         {% else %}
                             <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                         {% endif %}
-
 					</ul>
+                {% endblock %}
 				</div>
+                {% block categorys %}
 				<div class="col-md-3">
 					<div class="sidebar-widget">
 						<div class="blog-search">
@@ -135,6 +140,7 @@
 						</div>
 					</div>
 				</div>
+                {% endblock %}
 			</div>
 		</div>
 	</section>
