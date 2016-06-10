@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
+{% load blog_extras %}
 
 {% block preloader %}{% endblock %}
 {% block header %}
@@ -48,116 +49,53 @@
 	</section>
 	<!-- /PAGE HEADER -->
 
-
 	<!-- BLOG -->
 	<section id="blog">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9">
-					<div class="single-blog">
-						<article>
-							<div class="post-thumb"><img class="img-responsive" src="{% static 'blog/images/blog/01.jpg' %}" alt=""></div>
-							<h4 class="post-title"><a href="">Kpsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							<div class="post-meta text-uppercase">
-								<span>Appril 3, 2014</span>
-								<span>In <a href="">Design</a></span>
-								<span>By <a href="">Admin</a></span>
-							</div>
-							<div class="post-article">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae eum minus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae
-							</div>
-							<a href="" class="btn btn-readmore">Read More</a>
-						</article>
-					</div>
-					<hr>
-					<div class="single-blog">
-						<article>
-							<div class="post-link"><a href="">www.yourdomain.com</a></div>
-							<h4 class="post-title"><a href="">Kpsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							<div class="post-meta text-uppercase">
-								<span>Appril 3, 2014</span>
-								<span>In <a href="">Design</a></span>
-								<span>By <a href="">Admin</a></span>
-							</div>
-							<div class="post-article">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae eum minus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae
-							</div>
-							<a href="" class="btn btn-readmore">Read More</a>
-						</article>
-					</div>
-					<hr>
-					<div class="single-blog">
-						<article>
-							<div class="post-slider">
-								<div id="post-carousel" class="carousel slide" data-ride="carousel">			
-									<div class="carousel-inner">
-										<div class="item active">
-											<img src="{% static 'blog/images/blog/01.jpg' %}" alt="">
-										</div>
-										<div class="item">
-											<img src="{% static 'blog/images/blog/02.jpg' %}" alt="">
-										</div>
-										<div class="item">
-											<img src="{% static 'blog/images/blog/03.jpg' %}" alt="">
-										</div>
-										
-										<a class="post-carousel-left" href="#post-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-										<a class="post-carousel-right" href="#post-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
-									</div>		
-								</div> 
-							</div>
-							<h4 class="post-title"><a href="">Kpsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							<div class="post-meta text-uppercase">
-								<span>Appril 3, 2014</span>
-								<span>In <a href="">Design</a></span>
-								<span>By <a href="">Admin</a></span>
-							</div>
-							<div class="post-article">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae eum minus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae
-							</div>
-							<a href="" class="btn btn-readmore">Read More</a>
-						</article>
-					</div>
-					<hr>
-					<div class="single-blog">
-						<article>
-							<div class="post-quote">“Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti minus quasi temporibus reiciendis veniam reprehenderit, consequuntur. At blanditiis”</div>
-							<h4 class="post-title"><a href="">Kpsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							<div class="post-meta text-uppercase">
-								<span>Appril 3, 2014</span>
-								<span>In <a href="">Design</a></span>
-								<span>By <a href="">Admin</a></span>
-							</div>
-							<div class="post-article">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae eum minus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae
-							</div>
-							<a href="" class="btn btn-readmore">Read More</a>
-						</article>
-					</div>
-					<hr>
-					<div class="single-blog">
-						<article>
-							<div class="post-video"><iframe width="560" height="315" src="https://www.youtube.com/embed/uQBL7pSAXR8" frameborder="0" allowfullscreen></iframe></div>
-							<h4 class="post-title"><a href="">Kpsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							<div class="post-meta text-uppercase">
-								<span>Appril 3, 2014</span>
-								<span>In <a href="">Design</a></span>
-								<span>By <a href="">Admin</a></span>
-							</div>
-							<div class="post-article">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae eum minus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error accusamus, repudiandae tenetur itaque rem sapiente inventore vel deserunt officiis, facilis veritatis doloremque debitis id perferendis, eveniet esse molestiae
-							</div>
-							<a href="" class="btn btn-readmore">Read More</a>
-						</article>
-					</div>
-					<hr>
+                    {% for blog in blog_list%}
+                    <div class="single-blog">
+                        <article>
+                            {% for image in image_list %}
+                                {% if image.gallery_id == blog.id %}
+                                    <div class="post-thumb"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></div>
+                                {% endif %}
+                            {% endfor %}
+                            <h4 class="post-title"><a href="">{{ blog.title|escape }}</a></h4>
+                            <div class="post-meta text-uppercase">
+                                <span>작성일자 {{ blog.created_date }}</span>
+                            </div>
+                            <div class="post-article">
+                                {% autoescape off %}
+                                    {{ blog.detail|escape|linebreaks|truncatechars:300 }}
+                                {% endautoescape %}
+                            </div>
+                            <a href="" class="btn btn-readmore">자세히</a>
+                        </article>
+                    </div>
+                    <hr>
+                    {% endfor %}
 					<ul class="pagination">
-						<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+
+                        {% if paging_number != '1' %}
+						    <li><a href="/blog/{{ paging_number|add:-1 }}"><i class="fa fa-angle-left"></i></a></li>
+                        {% else %}
+                            <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        {% endif %}
+
+                        {% for i in page_size|get_range  %}
+                            {% if page_loop > i %}
+						    <li {{ paging_number|currunt_active:forloop.counter }}><a href="/blog/{{ paging_number|paging|add:forloop.counter }}/">{{ paging_number|paging|add:forloop.counter }}</a></li>
+                            {% endif %}
+						{% endfor %}
+
+                        {% if page_max_count|stringformat:"i" != paging_number %}
+                            <li><a href="/blog/{{ paging_number|add:1 }}"><i class="fa fa-angle-right"></i></a></li>
+                        {% else %}
+                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        {% endif %}
+
 					</ul>
 				</div>
 				<div class="col-md-3">
@@ -181,41 +119,6 @@
 							<li><a href="">Video</a></li>
 							<li><a href="">HTML</a></li>
 							<li><a href="">CSS</a></li>
-						</ul>
-					</div>
-					<div class="sidebar-widget">
-						<h4 class="sidebar-title">Flickr</h4>
-						<ul class="content-flickr">
-							<li>
-                                <a href="#" title="">
-                                    <img class="img-responsive" src="{%  static 'blog/images/img1.png' %}" alt="">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img class="img-responsive" src="{%  static 'blog/images/img2.png' %}" alt="">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img class="img-responsive" src="{%  static 'blog/images/img3.png' %}" alt="">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img class="img-responsive" src="{%  static 'blog/images/img4.png' %}" alt="">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img class="img-responsive" src="{%  static 'blog/images/img5.png' %}" alt="">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img class="img-responsive" src="{%  static 'blog/images/img6.png' %}" alt="">
-                                </a>
-                            </li>
 						</ul>
 					</div>
 					<div class="sidebar-widget">

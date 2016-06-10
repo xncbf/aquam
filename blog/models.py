@@ -5,17 +5,21 @@ from django.db import models
 class Gallery(models.Model):
     class Meta:
         verbose_name_plural = '게시판'
-    title = models.CharField('Title', max_length=20)
+    title = models.CharField('제목', max_length=50)
     detail = models.TextField('내용')
     created_date = models.DateTimeField(auto_now_add=True)
+    categorys = models.ManyToManyField('Categorys', verbose_name='카테고리')
 
     def __str__(self):
         return self.title
 
 
 class Image(models.Model):
+    class Meta:
+        verbose_name_plural = '이미지'
     file = models.FileField('이미지', upload_to='images/')
     gallery = models.ForeignKey('Gallery', related_name='images', blank=True, null=True)
+    thumbnail = models.BooleanField('썸네일 지정')
 
     def __str__(self):
         return self.filename
@@ -23,3 +27,12 @@ class Image(models.Model):
     @property
     def filename(self):
         return self.file.name.rsplit('/', 1)[-1]
+
+
+class Categorys(models.Model):
+    class Meta:
+        verbose_name_plural = '카테고리'
+    name = models.CharField('카테고리명', max_length=10)
+
+    def __str__(self):
+        return self.name

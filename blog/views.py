@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from blog.models import Gallery
+from .models import Gallery, Image
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 def index(request):
@@ -7,9 +9,26 @@ def index(request):
 
     })
 
-def blog(request):
-    for e in Gallery.detail.all():
-        print(e.headline)
-    return render(request, 'cluster/blog.html', {
 
+def blog(request, current_paging_number):
+    if current_paging_number == '':
+        current_paging_number = '1'
+
+    page = Paginator(Gallery.objects.order_by('-created_date'), 5)
+    page_count = 4
+    page_max_count = page._get_num_pages()
+    get_gallery = page
+    get_image = Image.objects.filter(thumbnail='True')
+    if (page_max_count-1) // page_count == (int(current_paging_number)-1) // page_count:
+        page_loop = page_max_count % page_count
+    else:
+        page_loop = page_count
+    return render(request, 'cluster/blog.html', {
+        'blog_list': get_gallery.page(current_paging_number),
+        'image_list': get_image,
+        'paging_number': current_paging_number,
+        'page_loop': page_loop,
+        'page_size': page_count,
+        'page_max_count': page_max_count,
     })
+

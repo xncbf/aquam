@@ -12,7 +12,7 @@ from django.conf.urls import url
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
-from blog.models import Gallery, Image
+from blog.models import Gallery, Image, Categorys
 
 
 class MultiUploadAdmin(admin.ModelAdmin):
@@ -289,6 +289,7 @@ class MultiUploadAdmin(admin.ModelAdmin):
 
 class ImageInlineAdmin(admin.TabularInline):
     model = Image
+    extra = 1
 
 
 class GalleryMultiuploadMixing(object):
@@ -322,6 +323,6 @@ class ImageAdmin(GalleryMultiuploadMixing, MultiUploadAdmin):
     multiupload_form = False
     multiupload_list = True
 
-
 admin.site.register(Gallery, GalleryAdmin)
 admin.site.register(Image, ImageAdmin)
+admin.site.register(Categorys)

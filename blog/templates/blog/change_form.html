@@ -39,7 +39,7 @@
             <tr class="form-row {% cycle "row1" "row2" %} {% if inline_admin_form.original or inline_admin_form.show_url %}has_original{% endif %}{% if forloop.last %} empty-form{% endif %}"
                  id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
             <td class="original">
-              <img src="{% get_media_prefix %}images/{{ inline_admin_form.original }}" alt="사진을 찾을수없습니다" width="150">
+              <img src="{% get_media_prefix %}images/{{ inline_admin_form.original }}" alt="사진" width="150">
               {{ inline_admin_form.original }}
               {% if inline_admin_form.original or inline_admin_form.show_url %}<p>
               {% if inline_admin_form.original %}
