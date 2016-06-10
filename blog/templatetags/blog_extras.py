@@ -1,4 +1,6 @@
 from django import template
+from django.conf import settings
+import re
 
 register = template.Library()
 page_size = 4
@@ -13,11 +15,6 @@ def paging(value):
 
 @register.filter
 def currunt_active(value, arg):
-    """
-    :param value:
-    :param arg:
-    :return:
-    """
     page = int(arg) % page_size
     str1 = ''
     if int(value) % page_size == page:
@@ -28,3 +25,24 @@ def currunt_active(value, arg):
 @register.filter
 def get_range(value):
     return range(value)
+
+
+@register.filter
+def string_to_image(value, arg):
+    pattern = re.compile(r"({\d+})")
+    for (numbers) in re.findall(pattern, value):
+        value = value.replace(numbers,
+                               '<img class="img-responsive" src="' +
+                               settings.MEDIA_URL +
+                               'images/' +
+                               arg[int(numbers.replace("{", "").replace("}", ""))].filename +
+                               '" alt="">')
+    result = value
+    return result
+
+
+@register.filter
+def string_to_blank(value):
+    pattern = re.compile(r"({\d+})")
+    result = pattern.sub("<i><b>[이미지]</b></i>", value)
+    return result
