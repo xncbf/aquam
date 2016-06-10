@@ -32,3 +32,12 @@ def blog(request, current_paging_number):
         'page_max_count': page_max_count,
     })
 
+
+def blog_detail(request, board_number):
+    get_blog_detail = Gallery.objects.filter(id=board_number)[0]
+    get_image = Image.objects.filter(gallery=board_number)
+    return render(request, 'cluster/blog_detail.html', {
+        'board_number': board_number,
+        'blog': get_blog_detail,
+        'image_list': get_image,
+    })
