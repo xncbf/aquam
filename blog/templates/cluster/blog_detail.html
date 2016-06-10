@@ -1,0 +1,34 @@
+{% extends 'cluster/blog.html' %}
+{% load staticfiles %}
+{% load blog_extras %}
+
+{% block preloader %}{% endblock %}
+{% block content %}
+    {% block pageheader %}{{ block.super }}{% endblock %}
+
+	<!-- BLOG -->
+	<section id="blog">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+                    <div class="single-blog">
+                        <article>
+                            <h4 class="post-title"><a href="">{{ blog.title|escape }}</a></h4>
+                            <div class="post-meta text-uppercase">
+                                <span>작성일자 {{ blog.created_date }}</span>
+                            </div>
+                            <div class="post-article">
+                                {% autoescape off %}
+                                    {{ blog.detail|escape|linebreaks }}
+                                {% endautoescape %}
+                            </div>
+                        </article>
+                    </div>
+                {% block pagination %}{% endblock %}
+				</div>
+                {% block categorys %}{{ block.super }}{% endblock %}
+			</div>
+		</div>
+	</section>
+	<!-- /BLOG -->
+{% endblock %}
