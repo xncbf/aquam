@@ -19,7 +19,7 @@
                             </div>
                             <div class="post-article">
                                 {% autoescape off %}
-                                    {{ blog.detail|escape|linebreaks }}
+                                    {{ blog.detail|escape|linebreaks|string_to_image:image_list }}
                                 {% endautoescape %}
                             </div>
                         </article>
