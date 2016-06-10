@@ -71,7 +71,7 @@
                             </div>
                             <div class="post-article">
                                 {% autoescape off %}
-                                    {{ blog.detail|escape|linebreaks|truncatechars:300 }}
+                                    {{ blog.detail|escape|linebreaks|truncatechars:300|string_to_blank }}
                                 {% endautoescape %}
                             </div>
                             <a href="/blog/detail/{{ blog.id }}" class="btn btn-readmore">자세히</a>
@@ -117,7 +117,7 @@
                         </div>
 					</div>
 					<div class="sidebar-widget">
-						<h4 class="sidebar-title">Categories</h4>
+						<h4 class="sidebar-title">카테고리</h4>
 						<ul>
 							<li><a href="">Web Design</a></li>
 							<li><a href="">Web Development</a></li>
