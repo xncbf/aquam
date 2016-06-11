@@ -46,3 +46,8 @@ def string_to_blank(value):
     pattern = re.compile(r"({\d+})")
     result = pattern.sub("<i><b>[이미지]</b></i>", value)
     return result
+
+
+@register.filter
+def lookup(d, key):
+    return d[key]
