@@ -57,21 +57,26 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9">
+                {% if blog_list.end_index == 0 %}
+                    <div class="single-blog">
+                        검색결과가 없습니다.
+                    </div>
+                {% else %}
                     {% for blog in blog_list%}
                     <div class="single-blog">
                         <article>
                             {% for image in image_list %}
                                 {% if image.gallery_id == blog.id %}
-                                    <div class="post-thumb"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></div>
+                                    <div class="post-thumb"><a href="/blog/detail/{{ blog.id }}"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></a></div>
                                 {% endif %}
                             {% endfor %}
-                            <h4 class="post-title"><a href="">{{ blog.title|escape }}</a></h4>
+                            <h4 class="post-title"><a href="/blog/detail/{{ blog.id }}">{{ blog.title|escape }}</a></h4>
                             <div class="post-meta text-uppercase">
                                 <span>작성일자 {{ blog.created_date }}</span>
                             </div>
                             <div class="post-article">
                                 {% autoescape off %}
-                                    {{ blog.detail|escape|linebreaks|truncatechars:300|string_to_blank }}
+                                    {{ blog.detail|escape|linebreaks|truncatechars:200|string_to_blank }}
                                 {% endautoescape %}
                             </div>
                             <a href="/blog/detail/{{ blog.id }}" class="btn btn-readmore">자세히</a>
@@ -79,23 +84,24 @@
                     </div>
                     <hr>
                     {% endfor %}
+                {% endif %}
                 {% block pagination %}
 					<ul class="pagination">
 
                         {% if paging_number != '1' %}
-						    <li><a href="/blog/{{ paging_number|add:-1 }}"><i class="fa fa-angle-left"></i></a></li>
+						    <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:-1 }}"><i class="fa fa-angle-left"></i></a></li>
                         {% else %}
                             <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
                         {% endif %}
 
                         {% for i in page_size|get_range  %}
                             {% if page_loop > i %}
-						    <li {{ paging_number|currunt_active:forloop.counter }}><a href="/blog/{{ paging_number|paging|add:forloop.counter }}/">{{ paging_number|paging|add:forloop.counter }}</a></li>
+						    <li {{ paging_number|currunt_active:forloop.counter }}><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|paging|add:forloop.counter }}/">{{ paging_number|paging|add:forloop.counter }}</a></li>
                             {% endif %}
 						{% endfor %}
 
                         {% if page_max_count|stringformat:"i" != paging_number %}
-                            <li><a href="/blog/{{ paging_number|add:1 }}"><i class="fa fa-angle-right"></i></a></li>
+                            <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:1 }}"><i class="fa fa-angle-right"></i></a></li>
                         {% else %}
                             <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                         {% endif %}
@@ -104,6 +110,7 @@
 				</div>
                 {% block categorys %}
 				<div class="col-md-3">
+                <!-- 검색
 					<div class="sidebar-widget">
 						<div class="blog-search">
                             <form>
@@ -115,17 +122,16 @@
                                 </span>
                             </form>
                         </div>
-					</div>
+					</div>-->
 					<div class="sidebar-widget">
 						<h4 class="sidebar-title">카테고리</h4>
 						<ul>
-							<li><a href="">Web Design</a></li>
-							<li><a href="">Web Development</a></li>
-							<li><a href="">Video</a></li>
-							<li><a href="">HTML</a></li>
-							<li><a href="">CSS</a></li>
+                            {% for e in category_list %}
+                                <li><a href="/blog/{{ e.id }}/1">{{ e }}</a></li>
+                            {% endfor %}
 						</ul>
 					</div>
+                    <!-- 태그
 					<div class="sidebar-widget">
 						<h4 class="sidebar-title">Tags</h4>
 						<div class="tagcloud">
@@ -138,7 +144,7 @@
 							<a href="">theme</a>
 							<a href="">plugin</a>
 						</div>
-					</div>
+					</div>-->
 				</div>
                 {% endblock %}
 			</div>

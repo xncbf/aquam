@@ -10,7 +10,7 @@
 	<section id="blog">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-9">
+				<div class="col-md-12">
                     <div class="single-blog">
                         <article>
                             <h4 class="post-title"><a href="">{{ blog.title|escape }}</a></h4>
@@ -19,14 +19,13 @@
                             </div>
                             <div class="post-article">
                                 {% autoescape off %}
-                                    {{ blog.detail|escape|linebreaks|string_to_image:image_list }}
+                                    {{ blog.detail|linebreaks|string_to_image:image_list }}
                                 {% endautoescape %}
                             </div>
                         </article>
                     </div>
                 {% block pagination %}{% endblock %}
 				</div>
-                {% block categorys %}{{ block.super }}{% endblock %}
 			</div>
 		</div>
 	</section>
