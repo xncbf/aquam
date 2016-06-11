@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
+{% load blog_extras %}
 {#{% block preloader %}{% endblock %}#}
 {% block content %}
 	<!-- SLIDER -->
@@ -119,28 +120,31 @@
 						<span class="st-border"></span>
 					</div>
 				</div>
-
 				<div class="portfolio-wrapper" >
 					<div class="col-md-12">
 						<ul class="filter">  			
-							<li><a class="active" href="#" data-filter="*">All</a></li>	
-							<li><a href="#" data-filter=".wordpress">WordPress</a></li>
+							<li><a class="active" href="#" data-filter="*">All</a></li>
+                            {% for e in category_list %}
+                                <li><a href="#" data-filter=".{{ e.name }}">{{ e }}</a></li>
+                            {% endfor %}
 						</ul><!--/#portfolio-filter-->
 					</div>
-					
+
 					<div class="portfolio-items">
-
-						<div class="col-md-4 col-sm-6 work-grid wordpress graphic">
-							<div class="portfolio-content">
-								<img class="img-responsive" src="{% static 'blog/images/works/portfolio-1.jpg' %}" alt="">
-								<div class="portfolio-overlay">
-									<a href="{% static 'blog/images/works/portfolio-1.jpg' %}"><i class="fa fa-camera-retro"></i></a>
-									<h5>Web Development</h5>
-									<p>Design, Develop</p>
-								</div>
-							</div>	
-						</div>
-
+                        {% for e in image_list %}
+                            <div class="col-md-4 col-sm-6 work-grid {{ e.gallery.categorys }} graphic">
+                                <div class="portfolio-content">
+                                    <img class="img-responsive" src="{{ MEDIA_URL }}images/{{ e }}" alt="">
+                                    <div class="portfolio-overlay">
+                                        <a href="{% static 'blog/images/works/portfolio-1.jpg' %}"><i class="fa fa-camera-retro"></i></a>
+                                        <h5>{{ e.gallery }}</h5>
+                                        {% autoescape off %}
+                                            <p>{{ e.gallery.detail|safe|escape|string_to_blank }}</p>
+                                        {% endautoescape %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
 					</div>				
 				</div>
 
