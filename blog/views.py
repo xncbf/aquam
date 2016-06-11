@@ -5,8 +5,14 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
-    return render(request, 'cluster/index.html', {
+    get_image = Image.objects.filter(thumbnail='True', gallery__categorys__isnull=False)
+    get_category = Categorys.objects.all()
+    get_gallery = Gallery.objects.filter(images__thumbnail=True, categorys__isnull=False)
 
+    return render(request, 'cluster/index.html', {
+        'image_list': get_image,
+        'category_list': get_category,
+        'gallery_list': get_gallery,
     })
 
 
