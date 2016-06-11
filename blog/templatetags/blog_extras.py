@@ -35,7 +35,7 @@ def string_to_image(value, arg):
                                '<img class="img-responsive" src="' +
                                settings.MEDIA_URL +
                                'images/' +
-                               arg[int(numbers.replace("{", "").replace("}", ""))].filename +
+                               arg[int(re.sub(r'\D', '', numbers))].filename +
                                '" alt="">')
     result = value
     return result
