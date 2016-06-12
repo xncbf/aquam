@@ -31,6 +31,8 @@ def get_range(value):
 def string_to_image(value, arg):
     pattern = re.compile(r"({\d+})")
     for (numbers) in re.findall(pattern, value):
+        if int(re.sub(r'\D', '', numbers)) >= arg.count():
+            break
         value = value.replace(numbers,
                                '<img class="img-responsive" src="' +
                                settings.MEDIA_URL +
