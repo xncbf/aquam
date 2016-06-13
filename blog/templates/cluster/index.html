@@ -212,24 +212,46 @@
 
 				</div>
 				<div class="col-sm-7 col-sm-offset-1">
-					<!-- * Daum 지도 - 지도퍼가기 -->
-                    <!-- 1. 지도 노드 -->
-                    <div id="daumRoughmapContainer1465041159906" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+                    <!--다음지도-->
+                    <div id="map" style="width:100%;height:350px;"></div>
 
-                    <!--
-                        2. 설치 스크립트
-                        * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
-                    -->
-                    <script charset="UTF-8" class="daum_roughmap_loader_script" src="http://dmaps.daum.net/map_js_init/roughmapLoader.js"></script>
+                    <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=38b89d63e2d445a0b1ef611468b8f3cd&libraries=services"></script>
+                    <script>
+                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                        mapOption = {
+                            center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                            level: 3 // 지도의 확대 레벨
+                        };
 
-                    <!-- 3. 실행 스크립트 -->
-                    <script charset="UTF-8">
-                        new daum.roughmap.Lander({
-                            "timestamp" : "1465041159906",
-                            "key" : "b6d4",
-                            "mapWidth" : "600",
-                            "mapHeight" : "300"
-                        }).render();
+                    var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+                    // 주소-좌표 변환 객체를 생성합니다
+                    var geocoder = new daum.maps.services.Geocoder();
+
+                    // 주소로 좌표를 검색합니다
+                    geocoder.addr2coord('서울 서초구 바우뫼로 53 코오롱아파트', function(status, result) {
+
+                        // 정상적으로 검색이 완료됐으면
+                         if (status === daum.maps.services.Status.OK) {
+
+                            var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new daum.maps.Marker({
+                                map: map,
+                                position: coords
+                            });
+
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new daum.maps.InfoWindow({
+                                content: '<div style="width:150px;text-align:center;padding:6px 0;">강남아쿠엠</div>'
+                            });
+                            infowindow.open(map, marker);
+
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+                        }
+                    });
                     </script>
 				</div>
 			</div>
