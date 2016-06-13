@@ -81,7 +81,7 @@
 		border-right: 0px;
 	}
 
-	#testimonial{
+	#testimonial, #testimonial2{
 		padding-top: 60px;
 		padding-bottom: 60px;
 	}
@@ -90,6 +90,9 @@
 		margin-top: 12px;
 	}
 
+	#map{
+		height: 250px;
+	}
 
 
 }
@@ -183,7 +186,9 @@
 		margin-top: 50px;
 	}
 
-
+	#map{
+		height: 250px;
+	}
 
 }
 
