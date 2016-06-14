@@ -23,11 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'hlkxn-2%3wajnhl74gs=x5=svp$ussdf8y8boeydcx99)ukhm('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
-
+SITE_ID = 2
+ADMINS = [
+    ('준환', 'xncbf@naver.com'),
+    ('준환님', 'xncbf12@gmail.com'),
+]
+SERVER_EMAIL = "no-reply@cjam.me"
 # Application definition
 
 INSTALLED_APPS = [
