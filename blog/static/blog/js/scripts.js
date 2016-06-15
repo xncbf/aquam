@@ -196,7 +196,8 @@
 			parallaxInit();						  
 		});
 		function parallaxInit() {		
-			$("#testimonial").parallax("50%", 0.3);
+			$("#testimonial").parallax("30%", 0.3);
+			$("#testimonial2").parallax("30%");
 		}	
 		parallaxInit();
 	}());
