@@ -82,8 +82,9 @@
 	}
 
 	#testimonial, #testimonial2{
-		padding-top: 60px;
-		padding-bottom: 60px;
+		/*padding-top: 60px;*/
+		/*padding-bottom: 60px;*/
+		padding: 0px;
 	}
 
 	#about-us .about-us .btn-send {
@@ -166,8 +167,9 @@
 	}
 
 	#testimonial, #testimonial2{
-		padding-top: 60px;
-		padding-bottom: 60px;
+		/*padding-top: 60px;*/
+		/*padding-bottom: 60px;*/
+		padding: 0px;
 	}
 
 	#about-us .about-us {
