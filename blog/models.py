@@ -19,7 +19,7 @@ class Image(models.Model):
         verbose_name_plural = '이미지'
     file = models.FileField('이미지', upload_to='images/')
     gallery = models.ForeignKey('Gallery', related_name='images', blank=True, null=True)
-    thumbnail = models.BooleanField('썸네일 지정')
+    thumbnail = models.BooleanField('썸네일 지정', default=0)
 
     def __str__(self):
         return self.filename
