@@ -23,4 +23,5 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('blog.urls', namespace='blog'),),
+    url(r'^get/', include('auto_crawling.urls', namespace='auto_crawling'),),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

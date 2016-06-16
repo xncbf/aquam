@@ -21,11 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #보안을 위해 서버에 파일로 보관
-with open('/etc/secret_key.txt') as f:
-    SECRET_KEY = f.read().strip()
+# with open('/etc/secret_key.txt') as f:
+#     SECRET_KEY = f.read().strip()
+SECRET_KEY = 'hlkxn-2%3wajnhl74gs=x5=svp$ussdf8y8boeydcx99)ukhm('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 SITE_ID = 2
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'blog',
+    'auto_crawling',
 ]
 
 MIDDLEWARE_CLASSES = [
