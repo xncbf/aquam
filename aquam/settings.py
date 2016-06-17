@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'blog',
-    'auto_crawling',
 ]
 
 MIDDLEWARE_CLASSES = [
