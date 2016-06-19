@@ -139,3 +139,4 @@ $RECYCLE.BIN/
 *.lnk
 .idea/
 db.sqlite3
+*.pyc
