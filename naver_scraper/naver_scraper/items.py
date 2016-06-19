@@ -6,9 +6,9 @@
 # http://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
-import scrapy_djangoitem
-from scrapy_djangoitem import DjangoItem
-from blog.models import Gallery,Image,Categorys
 
-class NaverScraperItem(DjangoItem):
-    django_model = Gallery
+
+class NaverScraperItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    pass

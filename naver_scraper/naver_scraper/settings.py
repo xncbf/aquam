@@ -8,16 +8,6 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
-import sys
-import os
-
-sys.path.append('<abs path to aquam/blog>')
-os.environ['DJANGO_SETTINGS_MODULE'] = 'blog.settings'
-
-import django
-django.setup()
-
-
 
 BOT_NAME = 'naver_scraper'
 
