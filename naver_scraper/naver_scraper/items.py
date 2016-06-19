@@ -9,5 +9,6 @@ from scrapy_djangoitem import DjangoItem
 from blog.models import Gallery
 
 
+
 class NaverScraperItem(DjangoItem):
     django_model = Gallery

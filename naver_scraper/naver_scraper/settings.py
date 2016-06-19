@@ -10,16 +10,20 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
 import sys
+sys.path.append('D:/workspace/DjangoProjects/BlogWorkspace/aquam')
+
 import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'aquam.settings'
 
+import django
+django.setup()
 
-sys.path.append('<abs path to 폴더명/프로젝트명>')
-os.environ['DJANGO_SETTINGS_MODULE'] = 'mappingsite.settings'
 
 BOT_NAME = 'naver_scraper'
 
 SPIDER_MODULES = ['naver_scraper.spiders']
 NEWSPIDER_MODULE = 'naver_scraper.spiders'
+
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -74,7 +78,9 @@ ROBOTSTXT_OBEY = True
 #ITEM_PIPELINES = {
 #    'naver_scraper.pipelines.SomePipeline': 300,
 #}
-
+ITEM_PIPELINES = {
+    'naver_scraper.pipelines.NaverScraperPipeline': 300,
+}
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
