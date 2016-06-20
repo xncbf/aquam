@@ -3,7 +3,7 @@ from django.conf import settings
 import re
 
 register = template.Library()
-page_size = 4
+page_size = 5
 
 
 @register.filter

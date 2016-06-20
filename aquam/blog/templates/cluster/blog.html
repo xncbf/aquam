@@ -90,7 +90,7 @@
                 {% block pagination %}
 					<ul class="pagination">
 
-                        {% if paging_number != '1' %}
+                        {% if blog_list.has_previous %}
 						    <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:-1 }}"><i class="fa fa-angle-left"></i></a></li>
                         {% else %}
                             <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
@@ -102,7 +102,7 @@
                             {% endif %}
 						{% endfor %}
 
-                        {% if page_max_count|stringformat:"i" != paging_number %}
+                        {% if blog_list.has_next %}
                             <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:1 }}"><i class="fa fa-angle-right"></i></a></li>
                         {% else %}
                             <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
