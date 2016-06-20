@@ -10,7 +10,8 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
 import sys
-sys.path.append('D:/workspace/DjangoProjects/BlogWorkspace/aquam')
+# sys.path.append('D:/workspace/DjangoProjects/BlogWorkspace/aquam')
+sys.path.append('/Users/user/Desktop/PycharmProjects/aquam/aquam')
 
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'aquam.settings'
