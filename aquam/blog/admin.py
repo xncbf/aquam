@@ -289,7 +289,7 @@ class MultiUploadAdmin(admin.ModelAdmin):
 
 class ImageInlineAdmin(admin.TabularInline):
     model = Image
-    extra = 1
+    extra = 0
 
 
 class GalleryMultiuploadMixing(object):

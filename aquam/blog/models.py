@@ -8,7 +8,7 @@ class Gallery(models.Model):
     title = models.CharField('제목', max_length=50)
     detail = models.TextField('내용')
     created_date = models.DateTimeField(auto_now_add=True)
-    categorys = models.ForeignKey('Categorys', verbose_name='카테고리')
+    categorys = models.ForeignKey('Categorys', verbose_name='카테고리', blank=True, null=True)
 
     def __str__(self):
         return self.title

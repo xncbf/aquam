@@ -76,7 +76,7 @@
                             </div>
                             <div class="post-article">
                             <a href="/blog/detail/{{ blog.id }}">
-                                {% autoescape off %}
+                                {% autoescape on %}
                                     {{ blog.detail|escape|linebreaks|truncatechars:200|string_to_blank }}
                                 {% endautoescape %}
                             </a>
