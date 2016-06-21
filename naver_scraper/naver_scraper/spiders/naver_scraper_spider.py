@@ -39,9 +39,9 @@ class NaverBlogSpider(scrapy.Spider):
                 galleryItem['created_date'] = e.xpath("..//span[@class='se_publishDate pcol2 fil5']/text()").extract()[0].split('\n')[0].replace('.', '-', 2).replace('.', '')
                 categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0]
                 galleryItem['categorys'] = categorysItem['name']
-                self.imageItem['gallery'] = galleryItem['title']
                 yield categorysItem
                 yield galleryItem
+                self.imageItem['gallery'] = galleryItem['title']
                 yield self.imageItem
             except:
                 continue
@@ -59,9 +59,9 @@ class NaverBlogSpider(scrapy.Spider):
                 # YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] 형식이어야 합니다
                 categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0]
                 galleryItem['categorys'] = categorysItem['name']
-                self.imageItem['gallery'] = galleryItem['title']
                 yield categorysItem
                 yield galleryItem
+                self.imageItem['gallery'] = galleryItem['title']
                 yield self.imageItem
             except:
                 continue
