@@ -140,4 +140,4 @@ $RECYCLE.BIN/
 .idea/
 db.sqlite3
 *.pyc
-media/images/*.*
+aquam/media/
