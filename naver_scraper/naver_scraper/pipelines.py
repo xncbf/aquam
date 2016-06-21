@@ -18,8 +18,8 @@ class NaverScraperPipeline(object):
             if item.django_model.objects.filter(name=item['name']).count() == 0:        #카테고리 중복확인
                 item.save()
         elif item.django_model == Image:
-            gallery_id = item.django_model.gallery_id
-            item.django_model.gallery_id = Gallery.objects.filter(title=gallery_id)[0].id
+            gallery_id = item['gallery']
+            item['gallery'] = Gallery.objects.filter(title=gallery_id)[0]
             files = item['file']
             for file in files:
                 item['file'] = file
@@ -27,7 +27,7 @@ class NaverScraperPipeline(object):
                     item.save()
         elif item.django_model == Gallery:
             categorys = item['categorys']
-            item['categorys'] = Categorys.objects.filter(name=categorys)[0].id
+            item['categorys'] = Categorys.objects.filter(name=categorys)[0]
             if item.django_model.objects.filter(title=item['title']).count() == 0:    #게시글 중복확인
                 item.save()
         return item

@@ -36,10 +36,10 @@ class NaverBlogSpider(scrapy.Spider):
                 galleryItem['title'] = e.xpath("..//h3/text()[2]").extract()[0]
                 smart_body = e.xpath("..//div[@class='se_component_wrap sect_dsc __se_component_area']").extract()[0]
                 galleryItem['detail'] = self.parse_download_image(smart_body)
-                galleryItem['created_date'] = e.xpath("..//span[@class='se_publishDate pcol2 fil5']/text()").split('\n')[0].extract()[0].replace('.', '-', 2).replace('.', '')
+                galleryItem['created_date'] = e.xpath("..//span[@class='se_publishDate pcol2 fil5']/text()").extract()[0].split('\n')[0].replace('.', '-', 2).replace('.', '')
                 categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0]
                 galleryItem['categorys'] = categorysItem['name']
-                self.imageItem.django_model.gallery_id = galleryItem['title']
+                self.imageItem['gallery'] = galleryItem['title']
                 yield categorysItem
                 yield galleryItem
                 yield self.imageItem
@@ -59,7 +59,7 @@ class NaverBlogSpider(scrapy.Spider):
                 # YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] 형식이어야 합니다
                 categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0]
                 galleryItem['categorys'] = categorysItem['name']
-                self.imageItem.django_model.gallery_id = galleryItem['title']
+                self.imageItem['gallery'] = galleryItem['title']
                 yield categorysItem
                 yield galleryItem
                 yield self.imageItem
