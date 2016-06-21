@@ -7,7 +7,7 @@ class Gallery(models.Model):
         verbose_name_plural = '게시판'
     title = models.CharField('제목', max_length=50)
     detail = models.TextField('내용')
-    created_date = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField()
     categorys = models.ForeignKey('Categorys', verbose_name='카테고리', blank=True, null=True)
 
     def __str__(self):
