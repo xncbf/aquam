@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
-    get_image = Image.objects.filter(thumbnail='True', gallery__categorys__isnull=False)
+    get_image = Image.objects.filter(thumbnail=True, gallery__categorys__isnull=False)
     get_category = Categorys.objects.all()
     get_gallery = Gallery.objects.filter(images__thumbnail=True, categorys__isnull=False)
 

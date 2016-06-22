@@ -54,7 +54,7 @@ class NaverBlogSpider(scrapy.Spider):
                 galleryItem['detail'] = detail_complite
                 galleryItem['created_date'] = e.xpath("..//span[@class='se_publishDate pcol2 fil5']/text()").extract()[0].split('\n')[0].replace('.', '-', 2).replace('.', '')
                 # YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] 형식이어야 합니다
-                categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0]
+                categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0].replace(' ', '')
                 galleryItem['categorys'] = categorysItem['name']
                 yield categorysItem
                 yield galleryItem
@@ -88,7 +88,7 @@ class NaverBlogSpider(scrapy.Spider):
                 galleryItem['detail'] = detail_complite
                 galleryItem['created_date'] = e.xpath("..//p[@class='date fil5 pcol2 _postAddDate']/text()").extract()[0].replace('.', '-', 2).replace('.', '')
                 # YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] 형식이어야 합니다
-                categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0]
+                categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0].replace(' ', '')
                 galleryItem['categorys'] = categorysItem['name']
                 yield categorysItem
                 yield galleryItem

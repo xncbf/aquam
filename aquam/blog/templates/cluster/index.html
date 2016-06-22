@@ -136,11 +136,12 @@
                                 <div class="portfolio-content">
                                     <img class="img-responsive" src="{{ MEDIA_URL }}images/{{ e }}" alt="">
                                     <div class="portfolio-overlay">
-                                        <a href="{% static 'blog/images/works/portfolio-1.jpg' %}"><i class="fa fa-camera-retro"></i></a>
-                                        <h5>{{ e.gallery }}</h5>
+                                        <a href="{{ MEDIA_URL }}images/{{ e }}"><i class="fa fa-camera-retro"></i></a>
+                                        <span onclick="location.href='/blog/detail/{{ e.gallery.id }}/'" style="cursor:pointer"><h5>{{ e.gallery }}</h5>
                                         {% autoescape on %}
                                             <p>{{ e.gallery.detail|safe|string_to_blank }}</p>
                                         {% endautoescape %}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
