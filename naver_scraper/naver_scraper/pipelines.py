@@ -25,6 +25,7 @@ class NaverScraperPipeline(object):
                 item['file'] = file
                 if item.django_model.objects.filter(file=item['file']).count() == 0:    #이미지 중복확인
                     item.save()
+                    item.clear()
         elif item.django_model == Gallery:
             categorys = item['categorys']
             item['categorys'] = Categorys.objects.filter(name=categorys)[0]
