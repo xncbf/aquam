@@ -38,7 +38,6 @@
 
 
 
-
 /* 2. BASIC STYLES */
 
 	html, body {
@@ -1035,6 +1034,19 @@
 		display: block;
 		position: relative;
 		width: 100%;
+	}
+
+	.post-article p{
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		color: #666666;
+    	line-height: 2.0;
+	}
+	.post-article p img{
+		margin: 10px 0px 10px 40px;
+		padding: 5px;
+		border: 1px solid #eeeeee;
 	}
 
 
