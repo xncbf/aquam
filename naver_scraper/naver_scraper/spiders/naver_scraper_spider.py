@@ -2,6 +2,8 @@ from gc import get_objects
 
 import scrapy
 import urllib.request
+
+from PIL import Image
 from naver_scraper.items import NaverScraperItem, ImageItem, CategorysItem
 from django.conf import settings
 
@@ -77,10 +79,12 @@ class NaverBlogSpider(scrapy.Spider):
         for i in range(0, response.count('src="')):
             temp = response.split('src="')[i+1]
             url = temp.split('"')[0]
-            file_name = download_local_url + url.split('/')[-1].split('?')[0].replace('%', '')
-            urllib.request.urlretrieve(url, file_name)      #이미지 다운로드
-            media_url = settings.MEDIA_URL + 'images/' + url.split('/')[-1].split('?')[0].replace('%', '')
+            file_name = url.split('/')[-1].split('?')[0].replace('%', '')
+            download_url = download_local_url + file_name
+            media_url = settings.MEDIA_URL + 'images/' + file_name
             replace_item = str(replace_item).replace(url, media_url)
+            if ImageItem.django_model.objects.filter(file='images/' + file_name).count() == 0:    #이미지 중복확인
+                urllib.request.urlretrieve(url, download_url)      #이미지 다운로드
         return replace_item
 
     def parse_image_url(self, response):
