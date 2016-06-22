@@ -70,7 +70,7 @@
                                     <div class="post-thumb"><a href="/blog/detail/{{ blog.id }}"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></a></div>
                                 {% endif %}
                             {% endfor %}
-                            <h4 class="post-title"><a href="/blog/detail/{{ blog.id }}">{{ blog.title|escape }}</a></h4>
+                            <h3 class="post-title"><a href="/blog/detail/{{ blog.id }}">{{ blog.title|escape }}</a></h3>
                             <div class="post-meta text-uppercase">
                                 <a href="/blog/detail/{{ blog.id }}"><span>작성일자 {{ blog.created_date }}</span></a>
                             </div>

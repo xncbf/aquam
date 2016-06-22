@@ -138,8 +138,8 @@
                                     <div class="portfolio-overlay">
                                         <a href="{% static 'blog/images/works/portfolio-1.jpg' %}"><i class="fa fa-camera-retro"></i></a>
                                         <h5>{{ e.gallery }}</h5>
-                                        {% autoescape off %}
-                                            <p>{{ e.gallery.detail|safe|escape|string_to_blank }}</p>
+                                        {% autoescape on %}
+                                            <p>{{ e.gallery.detail|safe|string_to_blank }}</p>
                                         {% endautoescape %}
                                     </div>
                                 </div>

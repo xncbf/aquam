@@ -33,8 +33,8 @@
 
 	@import url("http://fonts.googleapis.com/css?family=Raleway:200,300,600,700&subset=latin,latin-ext");
 	@import url("http://cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css");
+	@import url("http://fonts.googleapis.com/earlyaccess/notosanskr.css");
 	@import url("https://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css");
-
 
 
 
@@ -46,17 +46,18 @@
 	}
 
 	body {
-		font-family: "Nanum barun gothic", Helvetica, Arial, sans-serif;
+		font-family: "Nanum barun gothic", sans-serif;
 		font-size: 16px;
-		font-weight: 200;
+		font-weight: 300;
 		line-height: 1.7857;
 		letter-spacing: 0.075em;
 		color: #333333;
 		background-color: #fff;
+
 	}
 
 	a { 
-		color: #000;
+		color: #333;
 		-webkit-transition: all 0.2s ease-in-out;
 		-moz-transition: all 0.2s ease-in-out;
 		-ms-transition: all 0.2s ease-in-out;
@@ -206,6 +207,9 @@
 	.st-navbar ul li a{
 		text-transform: uppercase;
 		font-weight: bold;
+		font-size:20px;
+		font-family: "Nanum Gothic";
+		letter-spacing: 0.05em;
 		padding: 0;
 		margin: 14px;
 	}
@@ -403,7 +407,9 @@
 		margin-right: 10px;
 	}
 
-	.st-service p{}
+	.st-service p{
+		font-size: 16px;
+	}
 
 
 
@@ -449,6 +455,7 @@
 		text-transform: uppercase;
 		margin-right: 25px;
 		font-weight: 600;
+		font-family: "Nanum Gothic";
 	}
 
 	.portfolio-wrapper ul.filter li a{

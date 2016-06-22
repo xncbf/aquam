@@ -2,6 +2,7 @@ from gc import get_objects
 
 import scrapy
 import urllib.request
+import re
 
 from PIL import Image
 from naver_scraper.items import NaverScraperItem, ImageItem, CategorysItem
@@ -14,6 +15,9 @@ class NaverBlogSpider(scrapy.Spider):
     start_urls = [
         "http://blog.naver.com/kdk926/PostList.nhn?from=postList&blogId=kdk926&currentPage=9999",
     ]
+    replace_image = re.compile('<img.*?>')
+    remove_blank = re.compile('<img src="http://static.naver.net/blank.gif.*?>')
+    cleanr = re.compile("<.*?>")
 
 
     def parse(self, response):
@@ -34,15 +38,28 @@ class NaverBlogSpider(scrapy.Spider):
                 categorysItem = CategorysItem()
                 imageItem = ImageItem()
                 galleryItem['title'] = e.xpath("..//h3/text()[2]").extract()[0]
-                smart_body = e.xpath("..//div[@class='se_component_wrap sect_dsc __se_component_area']").extract()[0]
-                galleryItem['detail'] = self.parse_download_image(smart_body)
+
+                #body 재가공
+                smart_body = e.xpath("..//div[@class='se_component_wrap sect_dsc __se_component_area']").extract()[0].replace('<br>', '\s')
+                smart_body_remove_blank = re.sub(self.remove_blank, '', smart_body)
+                detail = self.parse_download_image(smart_body_remove_blank)
+                detail_replace_image = re.sub(self.replace_image, '{}', detail)
+                detail_cleanr_list = re.sub(self.cleanr, '', detail_replace_image).split('{}')
+                detail_complite =''
+                for idx, f in enumerate(detail_cleanr_list):
+                    detail_complite += f + '{' + str(idx) + '}'
+                detail_complite = detail_complite.rsplit('{', 1)[0].strip()
+                detail_complite = re.sub(r'[\t\r\n ]+', r' ', detail_complite).replace('\s', '\n')
+
+                galleryItem['detail'] = detail_complite
                 galleryItem['created_date'] = e.xpath("..//span[@class='se_publishDate pcol2 fil5']/text()").extract()[0].split('\n')[0].replace('.', '-', 2).replace('.', '')
+                # YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] 형식이어야 합니다
                 categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0]
                 galleryItem['categorys'] = categorysItem['name']
                 yield categorysItem
                 yield galleryItem
                 imageItem['gallery'] = galleryItem['title']
-                imageItem['file'] = self.parse_image_url(e.xpath("..//div[@class='se_component_wrap sect_dsc __se_component_area']").extract()[0])
+                imageItem['file'] = self.parse_image_url(smart_body_remove_blank)
                 yield imageItem
             except:
                 continue
@@ -54,8 +71,21 @@ class NaverBlogSpider(scrapy.Spider):
                 categorysItem = CategorysItem()
                 imageItem = ImageItem()
                 galleryItem['title'] = e.xpath("..//span[@class='pcol1 itemSubjectBoldfont']/text()[1]").extract()[0]
-                normal_body = e.xpath("..//div[@id='postViewArea']").extract()[0]
-                galleryItem['detail'] = self.parse_download_image(normal_body)
+
+
+                #body 재가공
+                normal_body = e.xpath("..//div[@id='postViewArea']").extract()[0].replace('<br>', '\s')
+                normal_body_remove_blank = re.sub(self.remove_blank, '', normal_body)
+                detail = self.parse_download_image(normal_body_remove_blank)
+                detail_replace_image = re.sub(self.replace_image, '{}', detail)
+                detail_cleanr_list = re.sub(self.cleanr, '', detail_replace_image).split('{}')
+                detail_complite =''
+                for idx, f in enumerate(detail_cleanr_list):
+                    detail_complite += f + '{' + str(idx) + '}'
+                detail_complite = detail_complite.rsplit('{', 1)[0].strip()
+                detail_complite = re.sub(r'[\t\r\n ]+', r' ', detail_complite).replace('\s', '\n')
+
+                galleryItem['detail'] = detail_complite
                 galleryItem['created_date'] = e.xpath("..//p[@class='date fil5 pcol2 _postAddDate']/text()").extract()[0].replace('.', '-', 2).replace('.', '')
                 # YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] 형식이어야 합니다
                 categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0]
@@ -63,7 +93,7 @@ class NaverBlogSpider(scrapy.Spider):
                 yield categorysItem
                 yield galleryItem
                 imageItem['gallery'] = galleryItem['title']
-                imageItem['file'] = self.parse_image_url(e.xpath("..//div[@id='postViewArea']").extract()[0])
+                imageItem['file'] = self.parse_image_url(normal_body_remove_blank)
                 yield imageItem
             except:
                 continue

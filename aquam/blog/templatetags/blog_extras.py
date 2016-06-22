@@ -46,7 +46,7 @@ def string_to_image(value, arg):
 @register.filter
 def string_to_blank(value):
     pattern = re.compile(r"({\d+})")
-    result = pattern.sub("<i><b>[이미지]</b></i>", value)
+    result = pattern.sub("", value)
     return result
 
 
