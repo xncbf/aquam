@@ -95,6 +95,11 @@
 		height: 250px;
 	}
 
+	.post-article p img{
+		margin: 10px 0px;
+		padding: 5px;
+		border: 1px solid #eeeeee;
+	}
 
 }
 
@@ -192,6 +197,11 @@
 		height: 250px;
 	}
 
+	.post-article p img{
+		margin: 10px 0px;
+		padding: 5px;
+		border: 1px solid #eeeeee;
+	}
 }
 
 /* XS Portrait */

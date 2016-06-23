@@ -5,12 +5,21 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
+    get_image_list = []
+    for e in Categorys.objects.values('id'):
+        get_gallery_per_categorys = Gallery.objects.order_by('-created_date').filter(categorys=e['id'])[:6]
+        for f in get_gallery_per_categorys:
+            try:
+                get_image_list.append(Image.objects.order_by('-id').filter(gallery=f)[0])
+            except:
+                pass
+
     get_image = Image.objects.filter(gallery__categorys__isnull=False)
-    get_category = Categorys.objects.all()
+    get_category = Categorys.objects.filter(gallery__images__isnull=False).distinct()
     get_gallery = Gallery.objects.filter(images__thumbnail=True, categorys__isnull=False)
 
     return render(request, 'cluster/index.html', {
-        'image_list': get_image,
+        'image_list': get_image_list,
         'category_list': get_category,
         'gallery_list': get_gallery,
     })
