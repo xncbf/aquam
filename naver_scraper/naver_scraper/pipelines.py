@@ -11,7 +11,6 @@ class NaverScraperPipeline(object):
     def __init__(self):
         self.ids_seen = set()
 
-    #몰라 예제에있던거
     def process_item(self, item, spider):
 
         if item.django_model == Categorys:
