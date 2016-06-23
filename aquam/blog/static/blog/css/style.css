@@ -243,7 +243,7 @@
 	}
 
 	#home-carousel  .item {
-		background-position: center top;
+		background-position: center -50px;
 		background-repeat: no-repeat;
 		background-size:cover;
 		width:100%;
