@@ -205,7 +205,7 @@
 
 	.st-navbar ul li a{
 		text-transform: uppercase;
-		font-weight: bold;
+		font-weight: 600;
 		font-size:20px;
 		font-family: "Nanum Gothic";
 		letter-spacing: 0.05em;
