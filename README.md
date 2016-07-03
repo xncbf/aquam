@@ -1,6 +1,6 @@
 # aquam
 [강남아쿠엠 공식 블로그][bloglink]
-[bloglink]: http://cjam.me
+[bloglink]: http://xn--2q1bu6oj8h4vab2o.com
 
 + django==1.9.6
 + gkuhn1님의 [django-admin-multiupload][link] 를 수정하여 사용했습니다
