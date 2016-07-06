@@ -1,0 +1,156 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% load blog_extras %}
+
+{% block preloader %}{% endblock %}
+{% block header %}
+	<!-- HEADER -->
+	<header id="header">
+		<nav class="navbar st-navbar navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#st-navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+				    	<span class="icon-bar"></span>
+				    	<span class="icon-bar"></span>
+				    	<span class="icon-bar"></span>
+					</button>
+					<a class="" href="/"><h1>강남아쿠엠</h1>
+					</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="st-navbar-collapse">
+					<ul class="nav navbar-nav navbar-right">
+				    	<li><a href="/#header">홈</a></li>
+				    	<li><a href="/#services">서비스</a></li>
+				    	<li><a href="/#our-works">작업사진</a></li>
+				    	<li><a href="/#contact">문의하기</a></li>
+				    	<li><a href="/blog">블로그</a></li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container -->
+		</nav>
+	</header>
+	<!-- /HEADER -->
+{% endblock %}
+{% block content %}
+    {% block pageheader %}
+	<!-- PAGE HEADER -->
+	<section id="page-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-title">
+                        <h1>블로그</h1>
+						<span class="st-border"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /PAGE HEADER -->
+    {% endblock %}
+
+
+	<!-- BLOG -->
+	<section id="blog">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+                {% if blog_list.end_index == 0 %}
+                    <div class="single-blog">
+                        검색결과가 없습니다.
+                    </div>
+                {% else %}
+                    {% for blog in blog_list%}
+                    <div class="single-blog">
+                        <article>
+                            {% for image in image_list %}
+                                {% if image.gallery_id == blog.id %}
+                                    <div class="post-thumb"><a href="/blog/detail/{{ blog.id }}"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></a></div>
+                                {% endif %}
+                            {% endfor %}
+                            <h3 class="post-title"><a href="/blog/detail/{{ blog.id }}">{{ blog.title|escape }}</a></h3>
+                            <div class="post-meta text-uppercase">
+                                <a href="/blog/detail/{{ blog.id }}"><span>작성일자 {{ blog.created_date }}</span></a>
+                            </div>
+                            <div class="post-article">
+                            <a href="/blog/detail/{{ blog.id }}">
+                                {% autoescape on %}
+                                    {{ blog.detail|striptags|truncatechars:200|string_to_blank }}
+                                {% endautoescape %}
+                            </a>
+                            </div>
+                            <a href="/blog/detail/{{ blog.id }}" class="btn btn-readmore">자세히</a>
+                        </article>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                {% endif %}
+                {% block pagination %}
+					<ul class="pagination">
+
+                        {% if blog_list.has_previous %}
+						    <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:-1 }}"><i class="fa fa-angle-left"></i></a></li>
+                        {% else %}
+                            <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        {% endif %}
+
+                        {% for i in page_size|get_range  %}
+                            {% if page_loop > i %}
+						    <li {{ paging_number|currunt_active:forloop.counter }}><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|paging|add:forloop.counter }}/">{{ paging_number|paging|add:forloop.counter }}</a></li>
+                            {% endif %}
+						{% endfor %}
+
+                        {% if blog_list.has_next %}
+                            <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:1 }}"><i class="fa fa-angle-right"></i></a></li>
+                        {% else %}
+                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        {% endif %}
+					</ul>
+                {% endblock %}
+				</div>
+                {% block categorys %}
+				<div class="col-md-3">
+                <!-- 검색
+					<div class="sidebar-widget">
+						<div class="blog-search">
+                            <form>
+                                <input type="text" name="search">
+                                <span>
+                                	<button id="submit_btn" class="search-submit" type="submit">
+                                    <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </form>
+                        </div>
+					</div>-->
+					<div class="sidebar-widget">
+						<h4 class="sidebar-title">카테고리</h4>
+						<ul>
+                            {% for e in category_list %}
+                                <li><a href="/blog/{{ e.id }}/1">{{ e }}</a></li>
+                            {% endfor %}
+						</ul>
+					</div>
+                    <!-- 태그
+					<div class="sidebar-widget">
+						<h4 class="sidebar-title">Tags</h4>
+						<div class="tagcloud">
+							<a href="">design</a>
+							<a href="">html</a>
+							<a href="">php</a>
+							<a href="">wordpress</a>
+							<a href="">css</a>
+							<a href="">development</a>
+							<a href="">theme</a>
+							<a href="">plugin</a>
+						</div>
+					</div>-->
+				</div>
+                {% endblock %}
+			</div>
+		</div>
+	</section>
+	<!-- /BLOG -->
+{% endblock %}

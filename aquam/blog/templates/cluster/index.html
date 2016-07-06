@@ -1,0 +1,238 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% load blog_extras %}
+{% block preloader %}{% endblock %}
+{% block content %}
+	<!-- SLIDER -->
+	<section id="slider">
+		<div id="home-carousel" class="carousel slide" data-ride="carousel">			
+			<div class="carousel-inner">
+				<div class="item active" style="background-image: url({% static 'blog/images/slider/01.jpg' %})">
+					<div class="carousel-caption container">
+						<div class="row">
+							<div class="col-sm-12">
+								<h1>타업체와 비교불가 서비스</h1>
+								<h2>완벽한 가죽복원</h2>
+								<p>담배자국, 스크래치, 오염, 찢어짐등 생활에서 일어날수 있는 가죽손상을 완벽하게 복원해드립니다</p>
+							</div>
+						</div>
+					</div>					
+				</div>
+				<div class="item" style="background-image: url({% static 'blog/images/slider/02.jpg' %})">
+					<div class="carousel-caption container">
+						<div class="row">
+							<div class="col-sm-12">
+								<h1>타업체와 비교불가 서비스</h1>
+								<h2>수리 및 교체</h2>
+								<p>전동시트, 열선, 천장, 바닥, 대시보드 등 수리 및 교체해드립니다</p>
+							</div>
+						</div>
+					</div>					
+				</div>
+				<a class="home-carousel-left" href="#home-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+				<a class="home-carousel-right" href="#home-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
+			</div>		
+		</div> <!--/#home-carousel--> 
+    </section>
+	<!-- /SLIDER -->
+
+	
+	<!-- SERVICES -->
+	<section id="services">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-title">
+						<h1>service</h1>
+						<span class="st-border"></span>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-sm-6 st-service">
+					<h2><i class="fa fa-car"></i>가죽시트</h2>
+					<p>담배자국, 스크래치, 오염, 찢어짐, 가죽손상, 색상변경, 시트교체 <br></p>
+				</div>
+
+				<div class="col-md-4 col-sm-6 st-service">
+					<h2><i class="fa fa-gear"></i>전동시트</h2>
+					<p>전동시트 수리<br><br></p>
+				</div>
+
+				<div class="col-md-4 col-sm-6 st-service">
+					<h2><i class="fa fa-star"></i>천장</h2>
+					<p>천장교체, 천장방음<br><br></p>
+				</div>
+
+				<div class="col-md-4 col-sm-6 st-service">
+					<h2><i class="fa fa-bars"></i>바닥</h2>
+					<p>카펫 교체, 매트 제작<br><br></p>
+				</div>
+
+				<div class="col-md-4 col-sm-6 st-service">
+					<h2><i class="fa fa-life-ring"></i>열선</h2>
+					<p>열선 수리, 열선 교체<br><br></p>
+				</div>
+
+				<div class="col-md-4 col-sm-6 st-service">
+					<h2><i class="fa fa-dashboard"></i>대시보드</h2>
+					<p>대시보드 가죽 색상변경<br><br></p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /SERVICES -->
+
+
+	<!-- TESTIMONIAL -->
+	<section id="testimonial">
+	</section>
+	<!-- /TESTIMONIAL -->
+
+	<!-- OUR WORKS -->
+	<section id="our-works">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-title">
+						<h1>OUR WORKS</h1>
+						<span class="st-border"></span>
+					</div>
+				</div>
+				<div class="portfolio-wrapper" >
+					<div class="col-md-12">
+						<ul class="filter">  			
+							<li><a class="active" href="#" data-filter="*">All</a></li>
+                            {% for e in category_list %}
+                                <li><a href="#" data-filter=".{{ e.name }}">{{ e }}</a></li>
+                            {% endfor %}
+						</ul><!--/#portfolio-filter-->
+					</div>
+
+					<div class="portfolio-items">
+                        {% for e in image_list %}
+                            <div class="col-md-4 col-sm-6 work-grid {{ e.gallery.categorys }} graphic">
+                                <div class="portfolio-content">
+                                    <img class="img-responsive" src="{{ MEDIA_URL }}images/{{ e }}" alt="">
+                                    <div class="portfolio-overlay">
+                                        <a href="{{ MEDIA_URL }}images/{{ e }}"><i class="fa fa-camera-retro"></i></a>
+                                        <span onclick="location.href='/blog/detail/{{ e.gallery.id }}/'" style="cursor:pointer"><h5>{{ e.gallery }}</h5>
+                                        {% autoescape on %}
+                                            <p>{{ e.gallery.detail|safe|string_to_blank }}</p>
+                                        {% endautoescape %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+					</div>				
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- /OUR WORKS -->
+
+
+	<!-- TESTIMONIAL -->
+	<!--<section id="testimonial2">
+	</section>-->
+	<!-- /TESTIMONIAL -->
+
+	<!-- ABOUT US -->
+	<section id="about-us">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="about-us text-center">
+						<h4>Since 1989</h4>
+						<p>강남아쿠엠은 1989년도에 시작되었습니다.
+                            <br>고객님들의 꾸준한 사랑을 받아 지금에 이르렀습니다.
+                            <br>28년의 경험을 바탕으로한 기술력으로 보답하겠습니다.
+                        </p>
+
+					</div>
+				</div>
+				<div class="col-sm-6 our-office">
+					<div id="office-carousel" class="carousel slide" data-ride="carousel">			
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="{% static 'blog/images/office/01.jpg' %}" alt="">
+							</div>
+							<a class="office-carousel-left" href="#office-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+							<a class="office-carousel-right" href="#office-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
+						</div>		
+					</div> <!--/#office-carousel--> 
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /ABOUT US -->
+
+	<!-- CONTACT -->
+	<section id="contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+				</div>
+				<div class="col-sm-4 contact-info">
+
+					<div class="section-title">
+						<h1>CONTACT</h1>
+						<span class="st-border"></span>
+					</div>
+					<!--<p class="contact-content">아래 휴대폰 번호로 연락주세요</p>-->
+					<p class="st-address"><i class="fa fa-map-marker"></i>서울 서초구 바우뫼로 53 코오롱아파트</p>
+					<p class="st-phone"><i class="fa fa-mobile"></i>010-5232-4090</p>
+					<p class="st-email"><i class="fa fa-building"></i>사업자등록번호: 123-21-84628</p>
+					<p class="st-website"><i class="fa fa-send"></i>카카오톡: aquam232</p>
+
+				</div>
+				<div class="col-sm-7 col-sm-offset-1">
+                    <!--다음지도-->
+                    <div id="map"></div>
+
+                    <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=38b89d63e2d445a0b1ef611468b8f3cd&libraries=services"></script>
+                    <script>
+                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                        mapOption = {
+                            center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                            level: 3 // 지도의 확대 레벨
+                        };
+
+                    var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+                    // 주소-좌표 변환 객체를 생성합니다
+                    var geocoder = new daum.maps.services.Geocoder();
+
+                    // 주소로 좌표를 검색합니다
+                    geocoder.addr2coord('서울 서초구 바우뫼로 53 코오롱아파트', function(status, result) {
+
+                        // 정상적으로 검색이 완료됐으면
+                         if (status === daum.maps.services.Status.OK) {
+
+                            var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new daum.maps.Marker({
+                                map: map,
+                                position: coords
+                            });
+
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new daum.maps.InfoWindow({
+                                content: '<div style="width:150px;text-align:center;padding:6px 0;">강남아쿠엠</div>'
+                            });
+                            infowindow.open(map, marker);
+
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+                        }
+                    });
+                    </script>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /CONTACT -->
+
+{% endblock %}
