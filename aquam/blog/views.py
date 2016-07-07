@@ -65,4 +65,5 @@ def blog_detail(request, board_number):
         'blog': get_blog_detail,
         'image_list': get_image,
         'category_list': get_category,
+        'request': request,
     })

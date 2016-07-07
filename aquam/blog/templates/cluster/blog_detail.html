@@ -16,21 +16,22 @@
                             <h3 class="post-title"><a href="">{{ blog.title|escape }}</a></h3>
                             <div class="post-meta text-uppercase">
                                 <span>작성일자 {{ blog.created_date }}</span>
-
-                                <div
-                                    class="fb-like"
-                                    data-share="true"
-                                    data-width="450"
-                                    data-show-faces="true">
-                                </div>
+                                <div class="fb-like" data-href="http://&#xc790;&#xb3d9;&#xcc28;&#xbcf5;&#xc6d0;.com{{ request.path }}" data-width="400" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                             </div>
                             <script>
                             // Only works after `FB.init` is called
                             function myFacebookLogin() {
-                              FB.login(function(){
-                                  // Note: The call will only work if you accept the permission request
-                                  FB.api('/me/feed', 'post', {message: '테스트'});
-                              }, {scope: 'publish_actions'});
+                                FB.getLoginStatus(function(response) {
+                                  if (response.status === 'connected') {
+                                    FB.api('/1104739159592297', function(response) {
+                                      console.log(response);
+                                    });
+                                  }
+                                  else {
+                                    FB.login();
+                                  }
+                                });
+
                             }
                             </script>
                             <button onclick="myFacebookLogin()">Login with Facebook</button>
