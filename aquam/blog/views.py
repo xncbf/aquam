@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Gallery, Image, Categorys
 from django.core.paginator import Paginator
 
@@ -57,7 +57,10 @@ def blog(request, current_paging_number, category):
 
 
 def blog_detail(request, board_number):
-    get_blog_detail = Gallery.objects.filter(id=board_number)[0]
+    if Gallery.objects.filter(id=board_number).count() != 0:
+        get_blog_detail = Gallery.objects.filter(id=board_number)[0]
+    else:
+        return redirect('/blog/')
     get_image = Image.objects.filter(gallery=board_number)
     get_category = Categorys.objects.all()
     return render(request, 'cluster/blog_detail.html', {
