@@ -14,7 +14,6 @@ def index(request):
             except:
                 pass
 
-    get_image = Image.objects.filter(gallery__categorys__isnull=False)
     get_category = Categorys.objects.filter(gallery__images__isnull=False).distinct()
     get_gallery = Gallery.objects.filter(images__thumbnail=True, categorys__isnull=False)
 

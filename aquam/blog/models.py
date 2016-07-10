@@ -13,6 +13,9 @@ class Gallery(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return "/blog/detail/%i/" % self.id
+
 
 class Image(models.Model):
     class Meta:
