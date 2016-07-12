@@ -141,3 +141,5 @@ $RECYCLE.BIN/
 db.sqlite3
 *.pyc
 aquam/media/
+
+*.toc
