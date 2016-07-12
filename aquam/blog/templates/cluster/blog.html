@@ -57,36 +57,34 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9">
-                {% if blog_list.end_index == 0 %}
-                    <div class="single-blog">
-                        검색결과가 없습니다.
-                    </div>
-                {% else %}
-                    {% for blog in blog_list%}
-                    <div class="single-blog">
-                        <article>
-                            {% for image in image_list %}
-                                {% if image.gallery_id == blog.id %}
-                                    <div class="post-thumb"><a href="/blog/detail/{{ blog.id }}"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></a></div>
-                                {% endif %}
-                            {% endfor %}
-                            <h3 class="post-title"><a href="/blog/detail/{{ blog.id }}">{{ blog.title|escape }}</a></h3>
-                            <div class="post-meta text-uppercase">
-                                <a href="/blog/detail/{{ blog.id }}"><span>작성일자 {{ blog.created_date }}</span></a>
-                            </div>
-                            <div class="post-article">
-                            <a href="/blog/detail/{{ blog.id }}">
-                                {% autoescape on %}
-                                    {{ blog.detail|striptags|truncatechars:200|string_to_blank }}
-                                {% endautoescape %}
-                            </a>
-                            </div>
-                            <a href="/blog/detail/{{ blog.id }}" class="btn btn-readmore">자세히</a>
-                        </article>
-                    </div>
-                    <hr>
-                    {% endfor %}
-                {% endif %}
+                {% for blog in blog_list%}
+                <div class="single-blog">
+                    <article>
+                        {% for image in image_list %}
+                            {% if image.gallery_id == blog.id %}
+                                <div class="post-thumb"><a href="/blog/detail/{{ blog.id }}"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></a></div>
+                            {% endif %}
+                        {% endfor %}
+                        <h3 class="post-title"><a href="/blog/detail/{{ blog.id }}">{{ blog.title|escape }}</a></h3>
+                        <div class="post-meta text-uppercase">
+                            <a href="/blog/detail/{{ blog.id }}"><span>작성일자 {{ blog.created_date }}</span></a>
+                        </div>
+                        <div class="post-article">
+                        <a href="/blog/detail/{{ blog.id }}">
+                            {% autoescape on %}
+                                {{ blog.detail|striptags|truncatechars:200|string_to_blank }}
+                            {% endautoescape %}
+                        </a>
+                        </div>
+                        <a href="/blog/detail/{{ blog.id }}" class="btn btn-readmore">자세히</a>
+                    </article>
+                </div>
+                <hr>
+                {% empty %}
+                <div class="single-blog">
+                    검색결과가 없습니다.
+                </div>
+                {% endfor %}
                 {% block pagination %}
 					<ul class="pagination">
 
