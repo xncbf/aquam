@@ -1,7 +1,6 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
 {% load blog_extras %}
-
 {% block preloader %}{% endblock %}
 {% block header %}
 	<!-- HEADER -->
@@ -110,19 +109,44 @@
 				</div>
                 {% block categorys %}
 				<div class="col-md-3">
-                <!-- 검색
+                <!-- 검색-->
 					<div class="sidebar-widget">
 						<div class="blog-search">
-                            <form>
+                            <form method="get" action=".">
                                 <input type="text" name="search">
                                 <span>
                                 	<button id="submit_btn" class="search-submit" type="submit">
                                     <i class="fa fa-search"></i>
                                     </button>
                                 </span>
+                                {% if query %}
+                                    <h3>Results</h3>
+
+                                    {% for result in page.object_list %}
+                                        <p>
+                                            <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
+                                        </p>
+                                    {% empty %}
+                                        <p>No results found.</p>
+                                    {% endfor %}
+
+                                    {% if page.has_previous or page.has_next %}
+                                        <div>
+                                            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                                            |
+                                            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                                        </div>
+                                    {% endif %}
+                                {% else %}
+                                    {# Show some example queries to run, maybe query syntax, something else? #}
+                                    ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+                                {% endif %}
                             </form>
                         </div>
-					</div>-->
+					</div>
+
+                <!--검색끝-->
+
 					<div class="sidebar-widget">
 						<h4 class="sidebar-title">카테고리</h4>
 						<ul>
