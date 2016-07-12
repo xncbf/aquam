@@ -142,4 +142,4 @@ db.sqlite3
 *.pyc
 aquam/media/
 
-*.toc
+aquam/aquam/whoosh_index
