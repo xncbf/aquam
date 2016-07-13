@@ -48,15 +48,17 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'blog',
     'haystack',
-    'whoosh',
+    'elasticsearch',
 ]
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
     },
 }
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

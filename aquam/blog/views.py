@@ -1,6 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import Gallery, Image, Categorys
 from django.core.paginator import Paginator
+from django.shortcuts import render_to_response
+
+from .forms import GallerySearchForm
+
+
+def notes(request):
+    form = GallerySearchForm(request.GET)
+    notes = form.search()
+    return render_to_response('search/search.html', {'notes': notes})
 
 
 # Create your views here.

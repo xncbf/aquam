@@ -5,9 +5,11 @@ from .models import Gallery
 
 class GalleryIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    pub_date = indexes.DateTimeField(model_attr='created_date')
+    title = indexes.EdgeNgramField(model_attr='title')
+    detail = indexes.EdgeNgramField(model_attr='title')
+    created_date = indexes.DateTimeField(model_attr='created_date')
 
-    content_auto = indexes.EdgeNgramField(model_attr='title')
+
 
 
     def get_model(self):
