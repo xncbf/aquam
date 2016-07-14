@@ -25,6 +25,5 @@ from django.http import HttpResponse
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('blog.urls', namespace='blog'),),
-    #url(r'^search/', include('haystack.urls')),
     url(r'^robots.txt', lambda x: HttpResponse("User-Agent: *\nAllow: /\nSitemap: http://xn--2q1bu6oj8h4vab2o.com/sitemap.xml", content_type="text/plain"), name="robots_file"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,5 +15,4 @@ urlpatterns = [
     url(r'^blog/detail/(?P<board_number>[0-9]+)/$', views.blog_detail),
     url(r'^blog/(?P<category>[0-9]+)/(?P<current_paging_number>[0-9]+)/$', views.blog),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}),
-    url(r'^search/', views.notes),
 ]

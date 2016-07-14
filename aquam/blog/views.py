@@ -6,12 +6,6 @@ from django.shortcuts import render_to_response
 from .forms import GallerySearchForm
 
 
-def notes(request):
-    form = GallerySearchForm(request.GET)
-    notes = form.search()
-    return render_to_response('search/search.html', {'notes': notes})
-
-
 # Create your views here.
 def index(request):
     get_image_list = []
