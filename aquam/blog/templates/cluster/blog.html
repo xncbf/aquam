@@ -34,20 +34,20 @@
 {% endblock %}
 {% block content %}
     {% block pageheader %}
-	<!-- PAGE HEADER -->
-	<section id="page-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="section-title">
-                        <h1>블로그</h1>
-						<span class="st-border"></span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- /PAGE HEADER -->
+        <!-- PAGE HEADER -->
+        <section id="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-title">
+                            <h1>블로그</h1>
+                            <span class="st-border"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /PAGE HEADER -->
     {% endblock %}
 
 
@@ -57,50 +57,50 @@
 			<div class="row">
 				<div class="col-md-9">
                 {% for blog in blog_list%}
-                <div class="single-blog">
-                    <article>
-                        {% for image in image_list %}
-                            {% if image.gallery_id == blog.id %}
-                                <div class="post-thumb"><a href="/blog/detail/{{ blog.id }}"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></a></div>
-                            {% endif %}
-                        {% endfor %}
-                        <h3 class="post-title"><a href="/blog/detail/{{ blog.id }}">{{ blog.title|escape }}</a></h3>
-                        <div class="post-meta text-uppercase">
-                            <a href="/blog/detail/{{ blog.id }}"><span>작성일자 {{ blog.created_date }}</span></a>
-                        </div>
-                        <div class="post-article">
-                        <a href="/blog/detail/{{ blog.id }}">
-                            {% autoescape on %}
-                                {{ blog.detail|striptags|truncatechars:200|string_to_blank }}
-                            {% endautoescape %}
-                        </a>
-                        </div>
-                        <a href="/blog/detail/{{ blog.id }}" class="btn btn-readmore">자세히</a>
-                    </article>
-                </div>
-                <hr>
+                    <div class="single-blog">
+                        <article>
+                            {% for image in image_list %}
+                                {% if image.gallery_id == blog.pk|string_to_int %}
+                                    <div class="post-thumb"><a href="/blog/detail/{{ blog.pk }}"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></a></div>
+                                {% endif %}
+                            {% endfor %}
+                            <h3 class="post-title"><a href="/blog/detail/{{ blog.pk }}">{{ blog.title|escape }}</a></h3>
+                            <div class="post-meta text-uppercase">
+                                <a href="/blog/detail/{{ blog.pk }}"><span>작성일자 {{ blog.created_date }}</span></a>
+                            </div>
+                            <div class="post-article">
+                            <a href="/blog/detail/{{ blog.pk }}">
+                                {% autoescape on %}
+                                    {{ blog.detail|striptags|string_to_blank|truncatechars:200 }}
+                                {% endautoescape %}
+                            </a>
+                            </div>
+                            <a href="/blog/detail/{{ blog.pk }}" class="btn btn-readmore">자세히</a>
+                        </article>
+                    </div>
+                    <hr>
                 {% empty %}
-                <div class="single-blog">
-                    검색결과가 없습니다.
-                </div>
+                    <div class="single-blog">
+                        검색결과가 없습니다.
+                    </div>
                 {% endfor %}
                 {% block pagination %}
 					<ul class="pagination">
 
                         {% if blog_list.has_previous %}
-						    <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:-1 }}"><i class="fa fa-angle-left"></i></a></li>
+						    <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:-1 }}/{% if request.GET.q != None %}?q={{ request.GET.q }}{% endif %}"><i class="fa fa-angle-left"></i></a></li>
                         {% else %}
                             <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
                         {% endif %}
 
                         {% for i in page_size|get_range  %}
                             {% if page_loop > i %}
-						    <li {{ paging_number|currunt_active:forloop.counter }}><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|paging|add:forloop.counter }}/">{{ paging_number|paging|add:forloop.counter }}</a></li>
+						    <li {{ paging_number|currunt_active:forloop.counter }}><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|paging|add:forloop.counter }}/{% if request.GET.q != None %}?q={{ request.GET.q }}{% endif %}">{{ paging_number|paging|add:forloop.counter }}</a></li>
                             {% endif %}
 						{% endfor %}
 
                         {% if blog_list.has_next %}
-                            <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:1 }}"><i class="fa fa-angle-right"></i></a></li>
+                            <li><a href="/blog/{% if category != '' %}{{ category }}/{% endif %}{{ paging_number|add:1 }}/{% if request.GET.q != None %}?q={{ request.GET.q }}{% endif %}"><i class="fa fa-angle-right"></i></a></li>
                         {% else %}
                             <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                         {% endif %}
@@ -108,68 +108,47 @@
                 {% endblock %}
 				</div>
                 {% block categorys %}
-				<div class="col-md-3">
-                <!-- 검색-->
-					<div class="sidebar-widget">
-						<div class="blog-search">
-                            <form method="get" action=".">
-                                <input type="text" name="search">
-                                <span>
-                                	<button id="submit_btn" class="search-submit" type="submit">
-                                    <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                                {% if query %}
-                                    <h3>Results</h3>
+                    <div class="col-md-3">
+                    <!-- 검색-->
+                        <div class="sidebar-widget">
+                            <div class="blog-search">
+                                <form method="get" action="/blog/">
+                                    <input type="text" name="q" onfocus="this.value=''" value="전체 범위 검색">
+                                    <span>
+                                        <button id="submit_btn" class="search-submit" type="submit">
+                                        <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </form>
 
-                                    {% for result in page.object_list %}
-                                        <p>
-                                            <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-                                        </p>
-                                    {% empty %}
-                                        <p>No results found.</p>
-                                    {% endfor %}
-
-                                    {% if page.has_previous or page.has_next %}
-                                        <div>
-                                            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                                            |
-                                            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                                        </div>
-                                    {% endif %}
-                                {% else %}
-                                    {# Show some example queries to run, maybe query syntax, something else? #}
-                                    ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
-                                {% endif %}
-                            </form>
+                            </div>
                         </div>
-					</div>
 
-                <!--검색끝-->
+                    <!--검색끝-->
 
-					<div class="sidebar-widget">
-						<h4 class="sidebar-title">카테고리</h4>
-						<ul>
-                            {% for e in category_list %}
-                                <li><a href="/blog/{{ e.id }}/1">{{ e }}</a></li>
-                            {% endfor %}
-						</ul>
-					</div>
-                    <!-- 태그
-					<div class="sidebar-widget">
-						<h4 class="sidebar-title">Tags</h4>
-						<div class="tagcloud">
-							<a href="">design</a>
-							<a href="">html</a>
-							<a href="">php</a>
-							<a href="">wordpress</a>
-							<a href="">css</a>
-							<a href="">development</a>
-							<a href="">theme</a>
-							<a href="">plugin</a>
-						</div>
-					</div>-->
-				</div>
+                        <div class="sidebar-widget">
+                            <h4 class="sidebar-title">카테고리</h4>
+                            <ul>
+                                {% for e in category_list %}
+                                    <li><a href="/blog/{{ e.id }}/1">{{ e }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- 태그
+                        <div class="sidebar-widget">
+                            <h4 class="sidebar-title">Tags</h4>
+                            <div class="tagcloud">
+                                <a href="">design</a>
+                                <a href="">html</a>
+                                <a href="">php</a>
+                                <a href="">wordpress</a>
+                                <a href="">css</a>
+                                <a href="">development</a>
+                                <a href="">theme</a>
+                                <a href="">plugin</a>
+                            </div>
+                        </div>-->
+                    </div>
                 {% endblock %}
 			</div>
 		</div>

@@ -34,12 +34,17 @@ def index(request):
 
 
 def blog(request, current_paging_number, category):
+    form = GallerySearchForm(request.GET)
     if current_paging_number == '':
         current_paging_number = '1'
     if category == '':
-        page = Paginator(Gallery.objects.order_by('-created_date'), 5)
+        page = Paginator(form.search().order_by('-created_date'), 5)
     else:
-        page = Paginator(Gallery.objects.filter(categorys=category).order_by('-created_date'), 5)
+        try:
+            if request.GET['q'] == '':
+                page = Paginator(form.search().order_by('-created_date'), 5)
+        except:
+            page = Paginator(Gallery.objects.filter(categorys=category).order_by('-created_date'), 5)
 
     # 한번에 표시할 페이지 수
     page_count = 5
