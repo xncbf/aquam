@@ -1,9 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Gallery, Image, Categorys
 from django.core.paginator import Paginator
-from django.shortcuts import render_to_response
-
-from .forms import GallerySearchForm
 
 
 # Create your views here.
@@ -28,17 +25,12 @@ def index(request):
 
 
 def blog(request, current_paging_number, category):
-    form = GallerySearchForm(request.GET)
     if current_paging_number == '':
         current_paging_number = '1'
     if category == '':
-        page = Paginator(form.search().order_by('-created_date'), 5)
+        page = Paginator(Gallery.objects.order_by('-created_date'), 5)
     else:
-        try:
-            if request.GET['q'] == '':
-                page = Paginator(form.search().order_by('-created_date'), 5)
-        except:
-            page = Paginator(Gallery.objects.filter(categorys=category).order_by('-created_date'), 5)
+        page = Paginator(Gallery.objects.filter(categorys=category).order_by('-created_date'), 5)
 
     # 한번에 표시할 페이지 수
     page_count = 5

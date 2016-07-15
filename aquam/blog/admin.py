@@ -12,7 +12,7 @@ from django.conf.urls import url
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
-from blog.models import Gallery, Image, Categorys
+from .models import Gallery, Image, Categorys
 
 
 class MultiUploadAdmin(admin.ModelAdmin):

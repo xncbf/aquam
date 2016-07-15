@@ -60,16 +60,16 @@
                     <div class="single-blog">
                         <article>
                             {% for image in image_list %}
-                                {% if image.gallery_id == blog.pk|string_to_int %}
-                                    <div class="post-thumb"><a href="/blog/detail/{{ blog.pk }}"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></a></div>
+                                {% if image.gallery_id == blog.id %}
+                                    <div class="post-thumb"><a href="/blog/detail/{{ blog.id }}"><img class="img-responsive" src="{{ MEDIA_URL }}images/{{ image }}" alt=""></a></div>
                                 {% endif %}
                             {% endfor %}
-                            <h3 class="post-title"><a href="/blog/detail/{{ blog.pk }}">{{ blog.title|escape }}</a></h3>
+                            <h3 class="post-title"><a href="/blog/detail/{{ blog.id }}">{{ blog.title|escape }}</a></h3>
                             <div class="post-meta text-uppercase">
-                                <a href="/blog/detail/{{ blog.pk }}"><span>작성일자 {{ blog.created_date }}</span></a>
+                                <a href="/blog/detail/{{ blog.id }}"><span>작성일자 {{ blog.created_date }}</span></a>
                             </div>
                             <div class="post-article">
-                            <a href="/blog/detail/{{ blog.pk }}">
+                            <a href="/blog/detail/{{ blog.id }}">
                                 {% autoescape on %}
                                     {{ blog.detail|striptags|string_to_blank|truncatechars:200 }}
                                 {% endautoescape %}
@@ -113,7 +113,7 @@
                         <div class="sidebar-widget">
                             <div class="blog-search">
                                 <form method="get" action="/blog/">
-                                    <input type="text" name="q" onfocus="this.value=''" value="전체 범위 검색">
+                                    <input type="text" name="q" onfocus="this.value=''" value="전체 검색">
                                     <span>
                                         <button id="submit_btn" class="search-submit" type="submit">
                                         <i class="fa fa-search"></i>
