@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Gallery, Image, Categorys
 from django.core.paginator import Paginator
+from django.utils.datastructures import MultiValueDictKeyError
+from django.db.models import Q
 
 
 # Create your views here.
@@ -27,10 +29,15 @@ def index(request):
 def blog(request, current_paging_number, category):
     if current_paging_number == '':
         current_paging_number = '1'
-    if category == '':
-        page = Paginator(Gallery.objects.order_by('-created_date'), 5)
-    else:
-        page = Paginator(Gallery.objects.filter(categorys=category).order_by('-created_date'), 5)
+    try:
+        page = Paginator(Gallery.objects.filter(Q(detail__contains=request.GET['q']) |
+                                                Q(title__contains=request.GET['q'])).
+                         order_by('-created_date'), 5)
+    except MultiValueDictKeyError:
+        if category == '':
+            page = Paginator(Gallery.objects.order_by('-created_date'), 5)
+        else:
+            page = Paginator(Gallery.objects.filter(categorys=category).order_by('-created_date'), 5)
 
     # 한번에 표시할 페이지 수
     page_count = 5
