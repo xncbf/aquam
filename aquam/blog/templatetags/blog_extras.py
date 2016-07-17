@@ -53,3 +53,8 @@ def string_to_blank(value):
 @register.filter
 def lookup(d, key):
     return d[key]
+
+
+@register.filter
+def string_to_int(value):
+    return int(value)

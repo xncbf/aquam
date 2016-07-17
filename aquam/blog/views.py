@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Gallery, Image, Categorys
 from django.core.paginator import Paginator
+from django.utils.datastructures import MultiValueDictKeyError
+from django.db.models import Q
 
 
 # Create your views here.
@@ -14,7 +16,6 @@ def index(request):
             except:
                 pass
 
-    get_image = Image.objects.filter(gallery__categorys__isnull=False)
     get_category = Categorys.objects.filter(gallery__images__isnull=False).distinct()
     get_gallery = Gallery.objects.filter(images__thumbnail=True, categorys__isnull=False)
 
@@ -28,10 +29,15 @@ def index(request):
 def blog(request, current_paging_number, category):
     if current_paging_number == '':
         current_paging_number = '1'
-    if category == '':
-        page = Paginator(Gallery.objects.order_by('-created_date'), 5)
-    else:
-        page = Paginator(Gallery.objects.filter(categorys=category).order_by('-created_date'), 5)
+    try:
+        page = Paginator(Gallery.objects.filter(Q(detail__contains=request.GET['q']) |
+                                                Q(title__contains=request.GET['q'])).
+                         order_by('-created_date'), 5)
+    except MultiValueDictKeyError:
+        if category == '':
+            page = Paginator(Gallery.objects.order_by('-created_date'), 5)
+        else:
+            page = Paginator(Gallery.objects.filter(categorys=category).order_by('-created_date'), 5)
 
     # 한번에 표시할 페이지 수
     page_count = 5
@@ -57,7 +63,10 @@ def blog(request, current_paging_number, category):
 
 
 def blog_detail(request, board_number):
-    get_blog_detail = Gallery.objects.filter(id=board_number)[0]
+    if Gallery.objects.filter(id=board_number).count() != 0:
+        get_blog_detail = Gallery.objects.filter(id=board_number)[0]
+    else:
+        return redirect('/blog/')
     get_image = Image.objects.filter(gallery=board_number)
     get_category = Categorys.objects.all()
     return render(request, 'cluster/blog_detail.html', {
@@ -65,4 +74,5 @@ def blog_detail(request, board_number):
         'blog': get_blog_detail,
         'image_list': get_image,
         'category_list': get_category,
+        'request': request,
     })

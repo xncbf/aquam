@@ -55,7 +55,7 @@
 
 	}
 
-	a { 
+	a {
 		color: #333;
 		-webkit-transition: all 0.2s ease-in-out;
 		-moz-transition: all 0.2s ease-in-out;
@@ -65,7 +65,7 @@
 	}
 
 	a:hover {
-		color: #000;
+		color: #888;
 	}
 
 	a, a:hover, a:active, a:focus, button:focus {
@@ -206,7 +206,7 @@
 	.st-navbar ul li a{
 		text-transform: uppercase;
 		font-weight: 600;
-		font-size:20px;
+		font-size: 21px;
 		font-family: "Nanum Gothic";
 		letter-spacing: 0.05em;
 		padding: 0;
@@ -216,7 +216,7 @@
 	.st-navbar ul li a:hover,
 	.st-navbar ul li a:focus {
 		background-color: transparent;
-		color: #000;
+		color: #888;
 	}
 
 	.st-navbar .navbar-header{
