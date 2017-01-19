@@ -13,7 +13,7 @@ class NaverBlogSpider(scrapy.Spider):
     name = "naverblog"
     allowed_domains = ["naver.com"]
     start_urls = [
-        "http://blog.naver.com/kdk926/PostList.nhn?from=postList&blogId=kdk926&currentPage=9999",
+        "http://blog.naver.com/kdk926/PostList.nhn?from=postList&blogId=kdk926&currentPage=50",
     ]
     replace_image = re.compile('<img.*?>')
     remove_blank = re.compile('<img src="http://static.naver.net/blank.gif.*?>')
