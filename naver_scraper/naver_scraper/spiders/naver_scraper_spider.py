@@ -1,10 +1,7 @@
-from gc import get_objects
-
 import scrapy
 import urllib.request
 import re
 
-from PIL import Image
 from naver_scraper.items import NaverScraperItem, ImageItem, CategorysItem
 from django.conf import settings
 
