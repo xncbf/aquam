@@ -58,10 +58,11 @@ class NaverBlogSpider(scrapy.Spider):
                 imageItem['file'] = self.parse_image_url(smart_body_remove_blank)
                 yield imageItem
             except:
+                pass
+            else:
+                # 스마트에디터에서 에러가 발생하지 않은경우 일반에디터는 건너뛴다
                 continue
-
-        # 일반 에디터
-        for e in response.xpath("//td[@class='bcc']"):
+            # 일반 에디터
             try:
                 galleryItem = NaverScraperItem()
                 categorysItem = CategorysItem()
