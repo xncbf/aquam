@@ -1,7 +1,6 @@
 import scrapy
 import urllib.request
 import re
-
 from naver_scraper.items import NaverScraperItem, ImageItem, CategorysItem
 from django.conf import settings
 
@@ -101,7 +100,8 @@ class NaverBlogSpider(scrapy.Spider):
         # url = "http://postfiles1.naver.net/20141204_160/kdk926_14176651128371lr8c_JPEG/20141203_110254.jpg?type=w2"
         # file_name = 'D:/workspace/DjangoProjects/BlogWorkspace/aquam/media/images/abcd.jpg'
         #download_local_url = 'D:/workspace/DjangoProjects/BlogWorkspace/aquam/media/images/'    #windows test
-        download_local_url = '/Users/user/Desktop/PycharmProjects/aquam/aquam/media/images/'    #mac test
+        download_local_url = 'D:/data2/aquam/aquam/media/images/'    #windows test
+        # download_local_url = '/Users/user/Desktop/PycharmProjects/aquam/aquam/media/images/'    #mac test
         # download_local_url = settings.MEDIA_ROOT + '/images/'  #ubuntu
         replace_item = response
         for i in range(0, response.count('src="')):

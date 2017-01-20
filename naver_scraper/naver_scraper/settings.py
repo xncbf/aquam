@@ -10,7 +10,8 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
 import sys
-sys.path.append('D:/workspace/aquam/aquam')
+sys.path.append('D:/data2/aquam/aquam')
+#sys.path.append('D:/workspace/aquam/aquam')
 # sys.path.append('/Users/user/Desktop/PycharmProjects/aquam/aquam')
 
 import os
