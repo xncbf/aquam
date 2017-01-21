@@ -48,7 +48,7 @@ class NaverBlogSpider(scrapy.Spider):
                 detail_complite = re.sub(r'[\t\r\n ]+', r' ', detail_complite).replace('\s', '\n')
 
                 galleryItem['detail'] = detail_complite
-                galleryItem['created_date'] = e.xpath("..//span[@class='se_publishDate pcol2 fil5']/text()").extract()[0].split('\n')[0].replace('.', '-', 2).replace('.', '')
+                galleryItem['created_date'] = e.xpath("..//span[@class='se_publishDate pcol2 fil5']/text()").extract()[0].replace('\n','').replace('\t','').replace('.', '-', 2).replace('.', '')
                 # YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] 형식이어야 합니다
                 categorysItem['name'] = e.xpath("..//a[@class='pcol2']/text()").extract()[0].replace(' ', '')
                 galleryItem['categorys'] = categorysItem['name']
@@ -57,7 +57,7 @@ class NaverBlogSpider(scrapy.Spider):
                 imageItem['gallery'] = galleryItem['title']
                 imageItem['file'] = self.parse_image_url(smart_body_remove_blank)
                 yield imageItem
-            except:
+            except Exception:
                 pass
             else:
                 # 스마트에디터에서 에러가 발생하지 않은경우 일반에디터는 건너뛴다
@@ -92,7 +92,7 @@ class NaverBlogSpider(scrapy.Spider):
                 imageItem['gallery'] = galleryItem['title']
                 imageItem['file'] = self.parse_image_url(normal_body_remove_blank)
                 yield imageItem
-            except:
+            except Exception:
                 continue
 
         return galleryItem
@@ -100,9 +100,7 @@ class NaverBlogSpider(scrapy.Spider):
     def parse_download_image(self, response):
         # url = "http://postfiles1.naver.net/20141204_160/kdk926_14176651128371lr8c_JPEG/20141203_110254.jpg?type=w2"
         # file_name = 'D:/workspace/DjangoProjects/BlogWorkspace/aquam/media/images/abcd.jpg'
-        #download_local_url = 'D:/workspace/DjangoProjects/BlogWorkspace/aquam/media/images/'    #windows test
-        download_local_url = 'D:/data2/aquam/aquam/media/images/'    #windows test
-        # download_local_url = '/Users/user/Desktop/PycharmProjects/aquam/aquam/media/images/'    #mac test
+        download_local_url = settings.BASE_DIR + '/media/images/'    #mac test
         # download_local_url = settings.MEDIA_ROOT + '/images/'  #ubuntu
         replace_item = response
         for i in range(0, response.count('src="')):
