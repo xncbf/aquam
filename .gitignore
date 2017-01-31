@@ -143,3 +143,4 @@ db.sqlite3
 aquam/media/
 
 aquam/aquam/whoosh_index
+aquam/static/
