@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['*']
 SITE_ID = 2
 ADMINS = [
     ('준환', 'xncbf@naver.com'),
-    ('준환님', 'xncbf12@gmail.com'),
 ]
 SERVER_EMAIL = "no-reply@cjam.me"
 # Application definition
