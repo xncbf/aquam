@@ -1,6 +1,5 @@
 # aquam
-[강남아쿠엠 공식 블로그][bloglink]
-[bloglink]: http://xn--2q1bu6oj8h4vab2o.com
+[강남아쿠엠 공식 블로그](http://xn--2q1bu6oj8h4vab2o.com)
 
 + django==1.9.6
 + scrapy==1.1
