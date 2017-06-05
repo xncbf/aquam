@@ -43,17 +43,17 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 # add (the rest of) our code
 COPY . /home/docker/code/
 
-RUN pip3 install -r /home/docker/code/jino/requirements.txt
+RUN pip3 install -r /home/docker/code/aquam/requirements.txt
 
 # install django, normally you would remove this step because your project would already
 # be installed in the code/app/ directory
-ENV JINO_SECRET_KEY jino!@dkanakf#
+ENV AQUAM_SECRET_KEY aquam!@dkanakf#
 ENV AWS_ACCESS_KEY_ID AKIAJ6P7D2TRPAQTYDAA
 ENV AWS_SECRET_ACCESS_KEY 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
 
-# ENV DJANGO_SETTINGS_MODULE jino.settings_local
+# ENV DJANGO_SETTINGS_MODULE aquam.settings_local
 
-RUN python3 /home/docker/code/jino/manage.py collectstatic --noinput
+RUN python3 /home/docker/code/aquam/manage.py collectstatic --noinput
 
 EXPOSE 80
 CMD ["supervisord", "-n"]
