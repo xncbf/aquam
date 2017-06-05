@@ -38,28 +38,30 @@ def blog(request, current_paging_number, category):
             page = Paginator(Gallery.objects.order_by('-created_date'), 5)
         else:
             page = Paginator(Gallery.objects.filter(categorys=category).order_by('-created_date'), 5)
-
-    # 한번에 표시할 페이지 수
-    page_count = 5
-    # 최대 페이지 수
-    page_max_count = page._get_num_pages()
-    get_gallery = page
-    get_image = Image.objects.filter(thumbnail='True')
-    get_category = Categorys.objects.all()
-    if (page_max_count-1) // page_count == (int(current_paging_number)-1) // page_count:
-        page_loop = ((page_max_count-1) % page_count)+1
-    else:
-        page_loop = page_count
-    return render(request, 'cluster/blog.html', {
-        'blog_list': get_gallery.page(current_paging_number),
-        'image_list': get_image,
-        'paging_number': current_paging_number,
-        'page_loop': page_loop,
-        'page_size': page_count,
-        'page_max_count': page_max_count,
-        'category_list': get_category,
-        'category': category,
-    })
+    try:
+        # 한번에 표시할 페이지 수
+        page_count = 5
+        # 최대 페이지 수
+        page_max_count = page._get_num_pages()
+        get_gallery = page
+        get_image = Image.objects.filter(thumbnail='True')
+        get_category = Categorys.objects.all()
+        if (page_max_count-1) // page_count == (int(current_paging_number)-1) // page_count:
+            page_loop = ((page_max_count-1) % page_count)+1
+        else:
+            page_loop = page_count
+        return render(request, 'cluster/blog.html', {
+            'blog_list': get_gallery.page(current_paging_number),
+            'image_list': get_image,
+            'paging_number': current_paging_number,
+            'page_loop': page_loop,
+            'page_size': page_count,
+            'page_max_count': page_max_count,
+            'category_list': get_category,
+            'category': category,
+        })
+    except:
+        return redirect('/blog/')
 
 
 def blog_detail(request, board_number):
