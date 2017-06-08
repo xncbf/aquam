@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from unipath import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+BASE_DIR = Path(__file__).ancestor(2)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -27,7 +27,6 @@ SECRET_KEY = os.environ['AQUAM_SECRET_KEY']
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-SITE_ID = 2
 ADMINS = [
     ('준환', 'xncbf@naver.com'),
 ]
@@ -87,10 +86,15 @@ WSGI_APPLICATION = 'aquam.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['AQUAM_DATABASE_NAME'],
+        'USER': os.environ['AUTHOME_DATABASE_USER'],
+        'PASSWORD': os.environ['AUTHOME_DATABASE_PASSWORD'],
+        'HOST': os.environ['AUTHOME_DATABASE_HOST'],
+        'PORT': os.environ['AUTHOME_DATABASE_PORT'],
     }
 }
+
 
 
 # Password validation
@@ -129,12 +133,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR.child('static')
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-#STATIC_ROOT = '/tmp/aquam/static/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-MEDIA_URL = '/media/'
+AWS_ACCESS_KEY_ID = os.environ['JINO_AWS_ACCESS_KEY_ID']  # access key
+AWS_SECRET_ACCESS_KEY = os.environ['JINO_AWS_SECRET_ACCESS_KEY']  # secret access key
+AWS_REGION = 'ap-northeast-2'
+AWS_STORAGE_BUCKET_NAME = 'jin-o'
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_HOST = 's3.%s.amazonaws.com' % AWS_REGION
+IMAGEKIT_DEFAULT_IMAGE_CACHE_BACKEND = 'imagekit.imagecache.NonValidatingImageCacheBackend'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#MEDIA_ROOT = '/tmp/aquam/media/'
+
+MEDIA_URL = "http://" + AWS_S3_HOST + "/" + AWS_STORAGE_BUCKET_NAME + "/"
+MEDIA_ROOT = BASE_DIR.child('images')
