@@ -1,3 +1,3 @@
-from aquam.setting import *
+from aquam.settings import *
 
 DEBUG = True

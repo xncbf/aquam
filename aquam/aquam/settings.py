@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 from unipath import Path
+from boto.ses import SESConnection
+from datetime import timedelta
+from celery.schedules import crontab
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).ancestor(2)
@@ -30,8 +33,42 @@ ALLOWED_HOSTS = ['*']
 ADMINS = [
     ('준환', 'xncbf@naver.com'),
 ]
-SERVER_EMAIL = "no-reply@cjam.me"
 # Application definition
+
+# ### 이메일 설정
+
+EMAIL_BACKEND = 'django_ses.SESBackend'
+AWS_SES_REGION_NAME = os.environ['AWS_SES_REGION_NAME']
+AWS_SES_REGION_ENDPOINT = os.environ['AWS_SES_REGION_ENDPOINT']
+AWS_ACCESS_KEY_ID = os.environ['AQUAM_AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AQUAM_AWS_SECRET_ACCESS_KEY']
+AWS_SES_RETURN_PATH = 'xncbf12@gmail.com'
+SERVER_EMAIL = 'xncbf12@gmail.com'
+DEFAULT_FROM_EMAIL = 'noreply@autho.me'
+SESConnection.DefaultRegionName = AWS_SES_REGION_NAME
+SESConnection.DefaultRegionEndpoint = AWS_SES_REGION_ENDPOINT
+# AWS_SES_AUTO_THROTTLE = 1.0  # 속도 조절 (초당 갯수)
+
+#### celery 설정
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_IMPORTS = ('aquam.tasks', )
+CELERY_RESULT_BACKEND = 'amqp://'
+
+# CELERY_ANNOTATIONS = {'aquam.tasks.get_ses_statistics': {'rate_limit': '10/s'}}
+CELERYBEAT_SCHEDULE = {
+    'get_ses_statistics': {
+        'task': 'aquam.tasks.get_ses_statistics',
+        'schedule': timedelta(days=1),
+    },
+    'verify_end_yn': {
+        'task': 'aquam.tasks.verify_end_yn',
+        "schedule": timedelta(seconds=30),
+    },
+    'celery.backend_cleanup': {
+        'task': 'celery.backend_cleanup',
+        "schedule": crontab(minute='0'),
+    }
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -42,7 +79,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'django_ses',
+    'storages',
     'blog',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -88,10 +128,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ['AQUAM_DATABASE_NAME'],
-        'USER': os.environ['AUTHOME_DATABASE_USER'],
-        'PASSWORD': os.environ['AUTHOME_DATABASE_PASSWORD'],
-        'HOST': os.environ['AUTHOME_DATABASE_HOST'],
-        'PORT': os.environ['AUTHOME_DATABASE_PORT'],
+        'USER': os.environ['AQUAM_DATABASE_USER'],
+        'PASSWORD': os.environ['AQUAM_DATABASE_PASSWORD'],
+        'HOST': os.environ['AQUAM_DATABASE_HOST'],
+        'PORT': os.environ['AQUAM_DATABASE_PORT'],
     }
 }
 
